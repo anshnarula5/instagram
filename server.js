@@ -8,7 +8,10 @@ const app = express()
 connectDB()
 
 app.use(cors())
+app.use(express.json())
 
-app.get("/", (req, res) => res.send("Hello"))
+//routes
+
+app.use("/api/user",require("./routes/user"))
 
 app.listen(5000, () => console.log("Running on 5000"))
