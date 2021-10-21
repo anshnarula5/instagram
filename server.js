@@ -1,17 +1,18 @@
-const connectDB = require("./config/db.js")
+const connectDB = require("./config/db.js");
 
-const express = require("express")
-const cors = require("cors")
+const express = require("express");
+const cors = require("cors");
 
-const app = express()
+const app = express();
 
-connectDB()
+connectDB();
 
-app.use(cors())
-app.use(express.json())
+app.use(cors());
+app.use(express.json());
 
 //routes
 
-app.use("/api/user",require("./routes/user"))
+app.use("/api/user", require("./routes/user"));
+app.use("/api/auth", require("./routes/auth"));
 
-app.listen(5000, () => console.log("Running on 5000"))
+app.listen(5000, () => console.log("Running on 5000"));

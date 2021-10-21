@@ -51,7 +51,7 @@ router.post("/", validator, async (req, res) => {
         id: newUser.id,
       },
     };
-    jwt.sign(payload, jwtsecret, (err, token) => {
+    jwt.sign(payload, jwtsecret , {expiresIn: 360000}, (err, token) => {
       if (err) throw err;
       res.json({ token });
     });
