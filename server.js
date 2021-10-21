@@ -14,5 +14,6 @@ app.use(express.json());
 
 app.use("/api/user", require("./routes/user"));
 app.use("/api/auth", require("./routes/auth"));
+app.use("/api/profile", require("./routes/profile"));
 
 app.listen(5000, () => console.log("Running on 5000"));

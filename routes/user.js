@@ -5,6 +5,7 @@ const config = require("config");
 
 const { check, validationResult } = require("express-validator");
 const User = require("../models/user");
+const Profile = require("../models/profile")
 
 const jwtsecret = config.get("jwtsecret");
 
@@ -45,6 +46,8 @@ router.post("/", validator, async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
     newUser.password = hashedPassword;
     await newUser.save();
+    const profile = new Profile({user : newUser.id})
+    await profile.save()
     //jwt
     const payload = {
       user: {
