@@ -12,7 +12,7 @@ router.get("/me", auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({ user: req.user.id }).populate(
       "user",
-      ["username", "fullname"]
+      ["username", "fullname", "profileImage"]
     );
     if (!profile) {
       return res
@@ -39,7 +39,7 @@ router.patch("/edit", [validateProfile, auth], async (req, res) => {
       { user: req.user.id },
       { $set: profileFields },
       { new: true, upsert: true, setDefaultsOnInsert: true }
-    ).populate("user", ["username", "fullname"]);
+    ).populate("user", ["username", "fullname", "profileImage"]);
     await newProfile.save();
     res.json(newProfile);
   } catch (error) {
@@ -55,6 +55,7 @@ router.get("/:id", auth, async (req, res) => {
     const profile = await Profile.findById(id).populate("user", [
       "username",
       "fullname",
+      "profileImage"
     ]);
     if (!profile) {
       return res

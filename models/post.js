@@ -17,8 +17,11 @@ const postSchema = new Schema({
         type: Date,
         default : Date.now()
     },
-    save: {
+    saved: {
      type : Boolean   
+    },
+    location: {
+     type : String   
     },
     likes: [
         {
