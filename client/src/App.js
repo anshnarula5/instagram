@@ -4,6 +4,7 @@ import Navbar from "./components/layout/Navbar";
 
 import "./App.css";
 import Login from "./components/loginForm/Login";
+import Alert from "./components/layout/Alert";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Navbar />
       <div className=" app">
         <div className="container">
+          {/* <Alert /> */}
         <Switch>
           <Route exact path="/login" component={Login}/>
         </Switch>

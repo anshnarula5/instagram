@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
+import {useDispatch} from "react-redux"
+import {setAlert} from "../../redux/actions/alerts";
 
 const Login = () => {
   const [login, setLogin] = useState(true);
   const [error, setError] = useState("");
+  const dispatch = useDispatch()
   const handleSubmit = (e) => {
     e.preventDefault();
       if (login) {
           if (!email || !password) {
-              setError("Please enter correct details")
+              dispatch(setAlert("Please enter correct details", "danger"))
               return
           }
       } else {
@@ -38,7 +41,6 @@ const Login = () => {
               <div className="mb-5">
                 <a
                   title="Instagram / Mackey Saturday, Public domain, via Wikimedia Commons"
-                  href="https://commons.wikimedia.org/wiki/File:Instagram_logo.svg"
                 >
                   <img
                     style={{ width: "19rem" }}
