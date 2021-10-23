@@ -5,6 +5,7 @@ import Navbar from "./components/layout/Navbar";
 import "./App.css";
 import Login from "./components/loginForm/Login";
 import Alert from "./components/layout/Alert";
+import Home from "./components/Home/Home";
 
 function App() {
   return (
@@ -12,9 +13,10 @@ function App() {
       <Navbar />
       <div className=" app">
         <div className="container">
-          {/* <Alert /> */}
+          <Alert />
         <Switch>
-          <Route exact path="/login" component={Login}/>
+          <Route exact path="/auth" component={Login}/>
+          <Route exact path="/" component={Home}/>
         </Switch>
         </div>
       </div>

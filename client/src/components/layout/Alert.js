@@ -1,10 +1,18 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const Alert = () => {
+  const alerts = useSelector((state) => state.alert);
   return (
-    <div class="alert alert-danger text-center" role="alert">
-      This is a danger alert—check it out!
-    </div>
+    <>
+      {alerts !== null &&
+        alerts.length !== 0 &&
+        alerts.map((alert) => (
+          <div class={`alert alert-${alert.type} text-center mt-1 w-50 mx-auto `} role="alert">
+            {alert.message}
+          </div>
+        ))}
+    </>
   );
 };
 

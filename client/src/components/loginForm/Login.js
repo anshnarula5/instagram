@@ -1,37 +1,46 @@
-import React, {useState} from "react";
-import {useDispatch} from "react-redux"
-import {setAlert} from "../../redux/actions/alerts";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {Redirect} from "react-router";
+import { setAlert } from "../../redux/actions/alerts";
+import {register} from "../../redux/actions/auth";
 
 const Login = () => {
   const [login, setLogin] = useState(true);
-  const [error, setError] = useState("");
-  const dispatch = useDispatch()
-  const handleSubmit = (e) => {
-    e.preventDefault();
-      if (login) {
-          if (!email || !password) {
-              dispatch(setAlert("Please enter correct details", "danger"))
-              return
-          }
-      } else {
-          if (!email || !password || !username || !fullname) {
-              setError("Please enter correct details")
-              return
-          }
-      }
-    setError("")
-    console.log(formData)
-  };
+  const dispatch = useDispatch();
+
+  
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     username: "",
     fullname: "",
   });
-    const {email, password, username, fullname} = formData;
-    const handleChange = (e) => {
-        setFormData({...formData, [e.target.name] : e.target.value})
+  const {email, password, username, fullname} = formData;
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (login) {
+      if (!email || !password) {
+        dispatch(setAlert("Please enter correct details", "danger"));
+        return;
+      }
     }
+    else {
+      if (!email || !password || !username || !fullname) {
+        dispatch(setAlert("Please enter correct details", "danger"));
+        return;
+      }
+      dispatch(register(formData))
+    }
+    
+  };
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
+  if (isAuthenticated) {
+    return <Redirect to = "/"/>
+  }
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
   return (
     <>
       <div className="row">
@@ -39,9 +48,7 @@ const Login = () => {
           <div className="card p-5">
             <form>
               <div className="mb-5">
-                <a
-                  title="Instagram / Mackey Saturday, Public domain, via Wikimedia Commons"
-                >
+                <a title="Instagram / Mackey Saturday, Public domain, via Wikimedia Commons">
                   <img
                     style={{ width: "19rem" }}
                     alt="Instagram logo"
@@ -100,10 +107,12 @@ const Login = () => {
                 />
               </div>
             </form>
-            <button class="btn btn-primary mt-3 btn-block" onClick={handleSubmit}>
+            <button
+              class="btn btn-primary mt-3 btn-block"
+              onClick={handleSubmit}
+            >
               {login ? "Sign in" : "Register"}
             </button>
-            <div className="text-center mt-4" style = {{color : 'red'}}>{error && error}</div>
           </div>
           <div className="card mt-3 text-center px-5 py-3">
             {login ? (

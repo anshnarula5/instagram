@@ -36,9 +36,7 @@ router.post("/", validator, async (req, res) => {
   try {
     const user = await User.findOne({ email });
     if (user) {
-      return res
-        .status(400)
-        .json({ message: [{ msg: "User already exists" }] });
+       return res.status(400).json({errors: [{msg: "User already exists"}]})
     }
     const newUser = new User({ username, fullname, email, password });
     //bcrypt
