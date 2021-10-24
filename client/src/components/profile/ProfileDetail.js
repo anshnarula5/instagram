@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const ProfileDetail = ({ profile }) => {
   return (
@@ -12,16 +12,18 @@ const ProfileDetail = ({ profile }) => {
             alt=""
           />
         </div>
-        <div className="col-md-7 col-sm-8 mt-3 d-flex flex-column justify-content-around">
+        <div className="col-md-7 col-sm-8 mt-3 d-flex flex-column justify-content-between">
           <div>
-            <p className="d-inline display-6 mx-3">{profile.user.username}</p>
-            <Link className="btn btn-outline-dark mx-3" to ="/profile/edit">Edit profile</Link>
+            <p className="d-inline display-6 mr-3">{profile.user.username}</p>
+            <Link className="btn btn-outline-dark mx-3" to="/profile/edit">
+              Edit profile
+            </Link>
             <p className="d-inline fs-4 mx-3">
               <i class="fas fa-cog"></i>
             </p>
           </div>
-          <div>
-            <p className="d-inline mx-3">
+          <div className = "my-3">
+            <p className="d-inline mr-3">
               <strong>{profile.posts.length}</strong> posts
             </p>
             <p className="d-inline mx-3">
@@ -32,10 +34,10 @@ const ProfileDetail = ({ profile }) => {
             </p>
           </div>
           <div>
-            <p className="mx-4">
+            <p >
               <strong>{profile.user.fullname}</strong>
+              <p >{profile.bio}</p>
             </p>
-                      <p className="lead">{profile.bio}</p>
           </div>
         </div>
       </div>

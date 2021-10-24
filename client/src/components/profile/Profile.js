@@ -4,21 +4,15 @@ import { getProfile } from "../../redux/actions/profile";
 import ProfileDetail from "./ProfileDetail";
 
 const Profile = () => {
-  const { isAuthenticated } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getProfile());
-  }, []);
   const { profile, loading } = useSelector((state) => state.profile);
-  console.log(profile);
-  
   return (
     <>
       {loading ? (
         "...loading"
       ) : (
-        <div className="w-75 offset-md-2">
+        <div className="w-75 offset-md-2 d-flex flex-column">
           <ProfileDetail profile={profile} />
+          <hr className = "w-75"/>
         </div>
       )}
     </>

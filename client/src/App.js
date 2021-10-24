@@ -1,12 +1,8 @@
 import React, { useEffect } from "react";
-import {
-  Switch,
-  Route,
-  BrowserRouter,
-} from "react-router-dom";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 
-import PrivateRoute from "./components/routing/PrivateRoute"
+import PrivateRoute from "./components/routing/PrivateRoute";
 
 import "./App.css";
 import Alert from "./components/layout/Alert";
@@ -24,11 +20,10 @@ if (localStorage.token) {
 
 function App() {
   const dispatch = useDispatch();
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   useEffect(() => {
     dispatch(loadUser());
   }, [dispatch]);
-  
+
   return (
     <BrowserRouter>
       <Navbar />
@@ -36,10 +31,10 @@ function App() {
         <div className="container">
           <Alert />
           <Switch>
-          <PrivateRoute exact path="/" component={Home} />
+            <PrivateRoute exact path="/" component={Home} />
             <Route exact path="/auth" component={Auth} />
-            <Route exact path="/profile/me" component={Profile} />
-            <Route exact path="/profile/edit" component={EditProfile} />
+            <PrivateRoute exact path="/profile/me" component={Profile} />
+            <PrivateRoute exact path="/profile/edit" component={EditProfile} />
           </Switch>
         </div>
       </div>
