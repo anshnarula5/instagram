@@ -18,6 +18,9 @@ const profileSchema = new Schema({
   gender: {
     type: String,
   },
+  email: {
+    type: String,
+  },
   followers: {
     type: [Schema.Types.ObjectId],
     ref: User,

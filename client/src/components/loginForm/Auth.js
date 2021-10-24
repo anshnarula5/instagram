@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {Redirect} from "react-router";
 import { setAlert } from "../../redux/actions/alerts";
-import {register} from "../../redux/actions/auth";
+import {login, register} from "../../redux/actions/auth";
 
-const Login = () => {
-  const [login, setLogin] = useState(true);
+const Auth = () => {
+  const [isLogin, setisLogin] = useState(true);
   const dispatch = useDispatch();
 
   
@@ -19,11 +19,12 @@ const Login = () => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (login) {
+    if (isLogin) {
       if (!email || !password) {
         dispatch(setAlert("Please enter correct details", "danger"));
         return;
       }
+      dispatch(login(formData))
     }
     else {
       if (!email || !password || !username || !fullname) {
@@ -67,7 +68,7 @@ const Login = () => {
                   required
                 />
               </div>
-              {!login && (
+              {!isLogin && (
                 <>
                   {" "}
                   <div class=" my-2">
@@ -111,17 +112,17 @@ const Login = () => {
               class="btn btn-primary mt-3 btn-block"
               onClick={handleSubmit}
             >
-              {login ? "Sign in" : "Register"}
+              {isLogin ? "Sign in" : "Register"}
             </button>
           </div>
           <div className="card mt-3 text-center px-5 py-3">
-            {login ? (
+            {isLogin ? (
               <>
                 Don't have an account?
                 <span
                   className="text-primary"
                   style={{ cursor: "pointer" }}
-                  onClick={() => setLogin(!login)}
+                  onClick={() => setisLogin(!isLogin)}
                 >
                   Sign Up
                 </span>{" "}
@@ -132,7 +133,7 @@ const Login = () => {
                 <span
                   className="text-primary"
                   style={{ cursor: "pointer" }}
-                  onClick={() => setLogin(!login)}
+                  onClick={() => setisLogin(!isLogin)}
                 >
                   Sign In
                 </span>{" "}
@@ -145,4 +146,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Auth;

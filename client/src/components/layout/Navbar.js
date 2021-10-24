@@ -1,12 +1,16 @@
 import React from "react";
+import {useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
 import logo from "../../img/logo1.png"
+import {logout} from "../../redux/actions/auth";
 
 const Navbar = () => {
+  const dispatch = useDispatch()
+
   return (
     <>
       <nav class="navbar navbar-expand-lg navbar-light bg-white static-top">
-        <div class="container ">
+        <div class="container w-50">
           <Link class="navbar-brand " to="/">
             <img
               src={logo}
@@ -33,7 +37,7 @@ const Navbar = () => {
                 </Link>
               </li>
               <li class="nav-item fs-4 mx-1">
-                <Link class="nav-link active" aria-current="page" to="/">
+                <Link class="nav-link active" aria-current="page" to="/auth">
                 <i class="far fa-comment-dots"></i>
                 </Link>
               </li>
@@ -69,9 +73,9 @@ const Navbar = () => {
                   aria-labelledby="navbarDropdown"
                 >
                   <li>
-                    <a class="dropdown-item" href="#">
-                      Action
-                    </a>
+                    <Link class="dropdown-item" to="/profile/me">
+                      profile
+                    </Link>
                   </li>
                   <li>
                     <a class="dropdown-item" href="#">
@@ -82,9 +86,9 @@ const Navbar = () => {
                     <hr class="dropdown-divider" />
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
-                      Something else here
-                    </a>
+                    <p class="dropdown-item" onClick = {() => dispatch(logout())} style = {{cursor : "pointer"}}>
+                      Logout
+                    </p>
                   </li>
                 </ul>
               </li>

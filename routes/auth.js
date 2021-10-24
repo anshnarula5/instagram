@@ -40,11 +40,11 @@ router.post("/", loginValidator, async (req, res) => {
   try {
     const user = await User.findOne({ email });
     if (!user) {
-      res.status(400).json({ message: [{ msg: "Invalid credentials" }] });
+      res.status(400).json({ errors: [{ msg: "Invalid credentials" }] });
       }
     const isMatch = await bcrypt.compare(password, user.password)
       if (!isMatch) {
-      res.status(400).json({ message: [{ msg: "Invalid credentials" }] });
+      res.status(400).json({ errors: [{ msg: "Invalid credentials" }] });
       }
       const payload = {
           user: {
