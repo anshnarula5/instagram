@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {Redirect} from "react-router";
 import {createPost} from "../../redux/actions/post";
-import {Redirect} from "react-router-dom"
 
 const CreatePost = () => {
   const { user, loading } = useSelector((state) => state.auth);
@@ -11,12 +11,17 @@ const CreatePost = () => {
     text: "",
     location: "",
   });
+  const [posted, setPosted] = useState(false)
   const { image, text, location } = formData;
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const handleSubmit = () => {  
     dispatch(createPost(formData))
+    setPosted(true)
+  }
+  if (posted && !loading) {
+    return <Redirect to ="/"/>
   }
   return (
     <div className="row ">

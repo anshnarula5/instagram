@@ -14,7 +14,8 @@ import { loadUser } from "./redux/actions/auth";
 import setAuthToken from "./utils/setAuthToken";
 import EditProfile from "./components/profile/EditProfile";
 import CreatePost from "./components/Home/CreatePost";
-import {getProfile} from "./redux/actions/profile";
+
+import ProfileById from "./components/profile/ProfileById"
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -39,6 +40,7 @@ function App() {
             <PrivateRoute exact path="/profile/me" component={Profile} />
             <PrivateRoute exact path="/profile/edit" component={EditProfile} />
             <PrivateRoute exact path="/create" component={CreatePost} />
+            <PrivateRoute exact path={`/profile/:id`} component={ProfileById} />
             <Redirect to ="/" />
           </Switch>
         </div>

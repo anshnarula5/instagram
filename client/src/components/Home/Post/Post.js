@@ -4,23 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 
 import { deletePost, likePost } from "../../../redux/actions/post";
+import {Link} from "react-router-dom";
 const Post = ({ post }) => {
   const [showText, setShowText] = useState(false);
-  const likes = useSelector(
-    (state) => state.post.posts.find((p) => p.id == post.id).likes
-  );
   const user = useSelector((state) => state.auth.user);
-  const [like, setLike] = useState(
-    likes.find((like) => like.user === user._id) ? true : false
-  );
   const dispatch = useDispatch();
   const handleLike = () => {
     dispatch(likePost(post._id));
-    setLike((prev) => !prev);
   };
   const handleDelete = () => {
     dispatch(deletePost(post._id))
-
   }
   return (
     <>
@@ -64,7 +57,7 @@ const Post = ({ post }) => {
         </div>
         <section class="card-title mt-2 d-flex align-items-center justify-content-between ">
           <div className=" d-flex align-items-center">
-            <div className="mx-1">
+            <Link to = {post.user._id === user._id ? "/profile/me" : `/profile/${post.user._id}`} className="mx-1">
               <img
                 src={post.user.profileImage}
                 alt=""
@@ -72,9 +65,9 @@ const Post = ({ post }) => {
                 className="postImage"
                 style={{ borderRadius: "50%", margin: "0px 8px" }}
               />
-            </div>
+            </Link >
             <div className="d-flex flex-column">
-              <h6>{post.user.username}</h6>
+              <Link to = {post.user._id === user._id ? "/profile/me" : `/profile/${post.user._id }`}  style = {{textDecoration : "none", color : "black"}}><h6>{post.user.username}</h6></Link>
               <small className="text-muted">{post?.location}</small>
             </div>
           </div>
@@ -94,11 +87,7 @@ const Post = ({ post }) => {
         <div class="card-body">
           <div className="d-flex justify-content-between">
             <p class="card-text fs-5">
-              {like ? (
-                <i class="fas fa-heart" onClick={handleLike} style={{ cursor: "pointer" }}></i>
-              ) : (
                 <i class="far fa-heart" onClick={handleLike} style={{ cursor: "pointer" }}></i>
-              )}
               <i class="far fa-comment mx-3" style={{ cursor: "pointer" }}></i>
               <i class="far fa-paper-plane" style={{ cursor: "pointer" }}></i>
             </p>

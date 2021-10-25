@@ -1,7 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom"
+import { useSelector } from "react-redux";
 
 const ProfileDetail = ({ profile }) => {
+  const user = useSelector((state) => state.auth.user);
   return (
     <>
       <div className="row w-75">
@@ -15,14 +17,16 @@ const ProfileDetail = ({ profile }) => {
         <div className="col-md-7 col-sm-8 mt-3 d-flex flex-column justify-content-between">
           <div>
             <p className="d-inline display-6 mr-3">{profile.user.username}</p>
-            <Link className="btn btn-outline-dark mx-3" to="/profile/edit">
-              Edit profile
-            </Link>
+            {profile.user._id === user._id && (
+              <Link className="btn btn-outline-dark mx-3" to="/profile/edit">
+                Edit profile
+              </Link>
+            )}
             <p className="d-inline fs-4 mx-3">
               <i class="fas fa-cog"></i>
             </p>
           </div>
-          <div className = "my-3">
+          <div className="my-3">
             <p className="d-inline mr-3">
               <strong>{profile.posts.length}</strong> posts
             </p>
@@ -34,9 +38,9 @@ const ProfileDetail = ({ profile }) => {
             </p>
           </div>
           <div>
-            <p >
+            <p>
               <strong>{profile.user.fullname}</strong>
-              <p >{profile.bio}</p>
+              <p>{profile.bio}</p>
             </p>
           </div>
         </div>

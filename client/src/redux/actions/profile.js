@@ -29,3 +29,12 @@ export const editProfile = (formData) => async (dispatch) => {
         dispatch({type : PROFILE_ERROR})
     }
 }
+
+export const getProfileById = (id) => async dispatch => {
+    try {
+        const res = await axios.get(`${url}/api/profile/${id}`)
+        dispatch({type : GET_PROFILE, payload : res.data})
+    } catch (error) {
+        dispatch({type : PROFILE_ERROR})
+    }
+}

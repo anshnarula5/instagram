@@ -52,11 +52,11 @@ router.patch("/edit", [validateProfile, auth], async (req, res) => {
 router.get("/:id", auth, async (req, res) => {
   const { id } = req.params;
   try {
-    const profile = await Profile.findById(id).populate("user", [
+    const profile = await Profile.findOne({user : id}).populate("user", [
       "username",
       "fullname",
       "profileImage",
-    ]);
+    ]).populate("posts");
     if (!profile) {
       return res
         .status(404)
