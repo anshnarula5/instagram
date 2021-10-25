@@ -2,3 +2,29 @@
     background-color: #fafafa;
     min-height: 100vh;
 }
+
+
+.post {
+    float: left;
+    width:  230px;
+    height: 230px;
+    object-fit: cover;
+}
+
+.virtual{
+    width:  50rem;
+    height: 25rem;
+    object-fit: cover;
+}
+p {
+    margin: 0;
+    padding: 0;
+}
+div {
+    margin: 0;
+    padding: 0;
+}
+h6 {
+    margin: 0;
+    padding: 0;
+}

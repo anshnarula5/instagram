@@ -8,4 +8,8 @@ export const LOGOUT = "LOGOUT"
 
 export const GET_PROFILE =  "GET_PROFILE"
 export const EDIT_PROFILE =  "EDIT_PROFILE"
-export const PROFILE_ERROR =  "PROFILE_ERROR"
+export const PROFILE_ERROR = "PROFILE_ERROR"
+
+export const GET_POSTS =  "GET_POSTS"
+export const POST_ERROR = "POST_ERROR"
+export const CREATE_POST = "CREATE_POST"
