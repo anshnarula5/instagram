@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {Redirect} from "react-router";
 import { setAlert } from "../../redux/actions/alerts";
 import {login, register} from "../../redux/actions/auth";
+import { getProfile } from "../../redux/actions/profile";
 
 const Auth = () => {
   const [isLogin, setisLogin] = useState(true);
@@ -37,6 +38,8 @@ const Auth = () => {
   };
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
   if (isAuthenticated) {
+    dispatch(getProfile())
+
     return <Redirect to = "/"/>
   }
   const handleChange = (e) => {

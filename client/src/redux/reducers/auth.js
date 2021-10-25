@@ -33,7 +33,7 @@ const auth = (state = initialState, action) => {
     case LOGIN_FAIL:
     case AUTH_ERROR:
     case LOGOUT:
-
+      
       localStorage.removeItem("token");
       return { ...state, loading: false, isAuthenticated: false, token: null };
 

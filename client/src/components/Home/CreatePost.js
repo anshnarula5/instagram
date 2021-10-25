@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {createPost} from "../../redux/actions/post";
+import {Redirect} from "react-router-dom"
 
 const CreatePost = () => {
   const { user, loading } = useSelector((state) => state.auth);
@@ -16,6 +17,7 @@ const CreatePost = () => {
   };
   const handleSubmit = () => {  
     dispatch(createPost(formData))
+    return <Redirect to = "/" />
   }
   return (
     <div className="row ">

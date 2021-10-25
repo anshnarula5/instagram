@@ -1,4 +1,4 @@
-import { EDIT_PROFILE, GET_PROFILE, PROFILE_ERROR } from "../type";
+import { EDIT_PROFILE, GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE } from "../type";
 
 const initialState = {
   profile: null,
@@ -14,6 +14,7 @@ const profile = (state = initialState, action) => {
     case EDIT_PROFILE:
       return { ...state, profile: payload, loading: false };
     case PROFILE_ERROR:
+    case CLEAR_PROFILE:
       return { ...state, profile: null, loading: false, error: payload };
     default:
       return state;

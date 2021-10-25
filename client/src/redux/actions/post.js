@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CREATE_POST, GET_POSTS, POST_ERROR } from "../type";
+import { CREATE_POST, GET_POSTS, LIKE_POST, POST_ERROR } from "../type";
 import { setAlert } from "./alerts";
 
 const url = "http://localhost:5000/api/posts";
@@ -9,7 +9,7 @@ export const getPosts = () => async (dispatch) => {
     const res = await axios.get(`${url}`);
     dispatch({ type: GET_POSTS, payload: res.data });
   } catch (error) {
-    dispatch({ type: POST_ERROR });
+    dispatch({ type: POST_ERROR, payload : {msg : error.response.statusText, status : error.response.status} });
   }
 };
 
@@ -26,7 +26,16 @@ export const createPost = (formData) => async (dispatch) => {
     const errors = error.response.data.errors;
     if (errors) {
       errors.forEach((err) => dispatch(setAlert(err.msg, "danger")));
-      }
-    dispatch({ type: POST_ERROR });
+    }
+    dispatch({ type: POST_ERROR, payload : {msg : error.response.statusText, status : error.response.status} });
+  }
+};
+
+export const likePost = (id) => async (dispatch) => {
+  try {
+    const res = await axios.patch(`${url}/${id}/like`);
+    dispatch({ type: LIKE_POST, payload : {id, likes : res.data} });
+  } catch (error) {
+    dispatch({ type: POST_ERROR, payload : {msg : error.response.statusText, status : error.response.status} });
   }
 };

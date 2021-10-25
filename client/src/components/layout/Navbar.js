@@ -9,7 +9,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav class="navbar navbar-expand-lg navbar-light bg-white static-top">
+      <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mb-5 border-bottom">
         <div class="container w-50">
           <Link class="navbar-brand " to="/">
             <img

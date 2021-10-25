@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Switch, Route, BrowserRouter } from "react-router-dom";
+import { Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 
 import PrivateRoute from "./components/routing/PrivateRoute";
@@ -14,22 +14,25 @@ import { loadUser } from "./redux/actions/auth";
 import setAuthToken from "./utils/setAuthToken";
 import EditProfile from "./components/profile/EditProfile";
 import CreatePost from "./components/Home/CreatePost";
+import {getProfile} from "./redux/actions/profile";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
 function App() {
+  const {isAuthenticated, loading }= useSelector(state => state.auth)
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadUser());
+    dispatch(getProfile())
   }, [dispatch]);
 
   return (
     <BrowserRouter>
-      <Navbar />
+      {isAuthenticated && !loading && <Navbar />}
       <div className=" app">
-        <div className="container">
+        <div className="container mt-5">
           <Alert />
           <Switch>
             <PrivateRoute exact path="/" component={Home} />
@@ -37,6 +40,7 @@ function App() {
             <PrivateRoute exact path="/profile/me" component={Profile} />
             <PrivateRoute exact path="/profile/edit" component={EditProfile} />
             <PrivateRoute exact path="/create" component={CreatePost} />
+            <Redirect to ="/" />
           </Switch>
         </div>
       </div>

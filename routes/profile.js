@@ -10,10 +10,10 @@ const router = express.Router();
 
 router.get("/me", auth, async (req, res) => {
   try {
-    const profile = await Profile.findOne({ user: req.user.id }).populate(
-      "user",
-      ["username", "fullname", "profileImage"]
-    );
+    const profile = await Profile.findOne({ user: req.user.id })
+      .populate("user")
+      .populate("posts");
+
     if (!profile) {
       return res
         .status(404)
@@ -55,7 +55,7 @@ router.get("/:id", auth, async (req, res) => {
     const profile = await Profile.findById(id).populate("user", [
       "username",
       "fullname",
-      "profileImage"
+      "profileImage",
     ]);
     if (!profile) {
       return res

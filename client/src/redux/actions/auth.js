@@ -1,6 +1,6 @@
 import axios from "axios";
 import {setAlert} from "./alerts";
-import {REGISTER_SUCCESS, REGISTER_FAIL, LOGIN_SUCCESS, LOGIN_FAIL, USER_LOADED, AUTH_ERROR, LOGOUT} from "../type";
+import {REGISTER_SUCCESS, REGISTER_FAIL, LOGIN_SUCCESS, LOGIN_FAIL, USER_LOADED, AUTH_ERROR, LOGOUT, CLEAR_PROFILE} from "../type";
 
 import setAuthToken from "../../utils/setAuthToken"
 import {getProfile} from "./profile";
@@ -33,8 +33,8 @@ export const register = formData => async (dispatch) => {
   };
   try {
     const res = await axios.post(`${url}/api/user`, formData, config);
-      dispatch({type: REGISTER_SUCCESS, payload: res.data});
-    dispatch(setAlert("Registeration successful", "success"))
+    dispatch({type: REGISTER_SUCCESS, payload: res.data});
+    dispatch(loadUser())
   } catch (error) {
       const errors = error.response.data.errors;
     if (errors) {
@@ -52,8 +52,9 @@ export const login = formData => async (dispatch) => {
   };
   try {
     const res = await axios.post(`${url}/api/auth`, formData, config)
-    dispatch(setAlert("Logged in", "success"))
     dispatch({type: LOGIN_SUCCESS, payload: res.data})
+    dispatch(loadUser())
+
   } catch (error) {
     const errors = error.response.data.errors;
     if (errors) {
@@ -67,7 +68,8 @@ export const login = formData => async (dispatch) => {
 
 export const logout = () => dispatch => {
   try {
-    dispatch({type : LOGOUT})
+    dispatch({type : CLEAR_PROFILE})
+    dispatch({type: LOGOUT})
   } catch (error) {
     dispatch({type : AUTH_ERROR})
   }

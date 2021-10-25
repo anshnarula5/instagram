@@ -58,7 +58,7 @@ router.patch("/:id/like", auth, async (req, res) => {
       post.likes.unshift(req.user.id);
     }
     await post.save();
-    res.json(post);
+    res.json(post.likes);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

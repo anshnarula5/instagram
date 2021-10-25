@@ -28,3 +28,12 @@ h6 {
     margin: 0;
     padding: 0;
 }
+
+.card{
+    border-radius: 0%;
+}
+
+
+.postImage{
+    border-radius: 0%;
+}
