@@ -4,7 +4,7 @@ import Posts from "./Posts";
 const Home = () => {
   return (
     <>
-      <div className="w-75 offset-md-1  mt-5">
+      <div className="w-75 offset-md-1">
         <div className="row">
           <div className="col-md-8 mt-4 ">
             <Posts />

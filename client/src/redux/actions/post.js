@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CREATE_POST, GET_POSTS, LIKE_POST, POST_ERROR } from "../type";
+import { CREATE_POST, DELETE_POST, GET_POSTS, LIKE_POST, POST_ERROR } from "../type";
 import { setAlert } from "./alerts";
 
 const url = "http://localhost:5000/api/posts";
@@ -39,3 +39,12 @@ export const likePost = (id) => async (dispatch) => {
     dispatch({ type: POST_ERROR, payload : {msg : error.response.statusText, status : error.response.status} });
   }
 };
+
+export const deletePost = (id) => async (dispatch) => {
+  try {
+    const res = await axios.delete(`${url}/${id}`)
+    dispatch({type : DELETE_POST, payload : id})
+    dispatch(setAlert("Deleted post", "success"))
+  } catch (error) {
+  }
+}

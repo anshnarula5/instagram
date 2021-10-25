@@ -25,14 +25,13 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadUser());
-    dispatch(getProfile())
   }, [dispatch]);
 
   return (
     <BrowserRouter>
       {isAuthenticated && !loading && <Navbar />}
       <div className=" app">
-        <div className="container mt-5">
+        <div className="container ">
           <Alert />
           <Switch>
             <PrivateRoute exact path="/" component={Home} />

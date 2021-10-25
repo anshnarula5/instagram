@@ -9,7 +9,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mb-5 border-bottom">
+      <nav class="navbar navbar-expand-lg navbar-light bg-white static-top border-bottom">
         <div class="container w-50">
           <Link class="navbar-brand " to="/">
             <img
@@ -42,7 +42,7 @@ const Navbar = () => {
                 </Link>
               </li>
               <li class="nav-item fs-4 mx-1">
-                <Link class="nav-link active" aria-current="page" to="/">
+                <Link class="nav-link active" aria-current="page" to="/create">
                 <i class="far fa-plus-square"></i>
                 </Link>
               </li>

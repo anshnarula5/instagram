@@ -1,4 +1,4 @@
-import { CREATE_POST, GET_POSTS, POST_ERROR, LIKE_POST } from "../type";
+import { CREATE_POST, GET_POSTS, POST_ERROR, LIKE_POST, DELETE_POST } from "../type";
 
 const initialState = {
   post: null,
@@ -24,6 +24,8 @@ const post = (state = initialState, action) => {
         ),
         loading: false,
       };
+    case DELETE_POST:
+      return {...state, posts : state.posts.filter(post => post._id !== payload), loading : false }
     default:
       return state;
   }

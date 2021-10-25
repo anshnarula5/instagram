@@ -17,7 +17,6 @@ const CreatePost = () => {
   };
   const handleSubmit = () => {  
     dispatch(createPost(formData))
-    return <Redirect to = "/" />
   }
   return (
     <div className="row ">

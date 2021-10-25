@@ -46,24 +46,32 @@ router.get("/", auth, async (req, res) => {
 //Like a post
 
 router.patch("/:id/like", auth, async (req, res) => {
-  const { id } = req.params;
   try {
-    const post = await Post.findById(id);
-    const prevLike = post.likes.find(
-      (like) => like._id.toString() === req.user.id
-    );
-    if (prevLike) {
-      post.likes.splice(post.likes.indexOf(req.user.id), 1);
+    const post = await Post.findById(req.params.id);
+
+    // Check if the post has already been liked
+    if (
+      post.likes.filter((like) => like.user.toString() === req.user.id).length >
+      0
+    ) {
+      const removeIndex = post.likes
+        .map((like) => like.user.toString())
+        .indexOf(req.user.id);
+
+      post.likes.splice(removeIndex, 1);
+      await post.save();
+      res.json(post.likes);
     } else {
-      post.likes.unshift(req.user.id);
+      
+      post.likes.unshift({ user: req.user.id });
+      await post.save();
+      res.json(post.likes);
     }
-    await post.save();
-    res.json(post.likes);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
   }
 });
-
 // comment on a post
 
 const validateComment = [
@@ -78,10 +86,13 @@ router.patch("/:id/comment", [validateComment, auth], async (req, res) => {
   }
   const { text } = req.body;
   try {
-      const post = await Post.findById(id).populate("user", ["username", "profileImage"]);
-      if (!post) {
-          res.status(400).json({message : "No post found"})
-      }
+    const post = await Post.findById(id).populate("user", [
+      "username",
+      "profileImage",
+    ]);
+    if (!post) {
+      res.status(400).json({ message: "No post found" });
+    }
     const user = await User.findById(req.user.id).select([
       "-password",
       "-fullname",
@@ -144,8 +155,11 @@ router.delete("/:id/comment/:commentId", auth, async (req, res) => {
 
 router.get("/:id", auth, async (req, res) => {
   const { id } = req.params;
-    try {
-        const post = await Post.findById(id).populate("user",["profileImage", "username"]);
+  try {
+    const post = await Post.findById(id).populate("user", [
+      "profileImage",
+      "username",
+    ]);
     if (!post) {
       res.status(404).json({ message: "no post found" });
     }
@@ -175,6 +189,5 @@ router.delete("/:id", auth, async (req, res) => {
     return res.status(500).send("Server Error");
   }
 });
-  
 
 module.exports = router;

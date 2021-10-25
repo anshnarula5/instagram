@@ -1,4 +1,5 @@
-.app{
+
+.app {
     background-color: #fafafa;
     min-height: 100vh;
 }
@@ -6,34 +7,50 @@
 
 .post {
     float: left;
-    width:  230px;
+    width: 230px;
     height: 230px;
     object-fit: cover;
 }
 
-.virtual{
-    width:  50rem;
+.virtual {
+    width: 50rem;
     height: 25rem;
     object-fit: cover;
 }
+
 p {
     margin: 0;
     padding: 0;
 }
+
 div {
     margin: 0;
     padding: 0;
 }
+
 h6 {
     margin: 0;
     padding: 0;
 }
 
-.card{
+h6 {
+    margin: 0;
+    padding: 0;
+}
+.modal hr {
+    margin: 0;
+    padding: 0;
+}
+
+.card {
     border-radius: 0%;
 }
 
 
-.postImage{
+.postImage {
     border-radius: 0%;
+}
+.alert {
+    z-index: 100;
+    position: relative;
 }
