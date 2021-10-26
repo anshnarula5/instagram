@@ -33,9 +33,11 @@ const postSchema = new Schema({
     ],
     comments: [
         {
-            user: {
-                type: Schema.Types.ObjectId,
-                ref : "User"
+            username: {
+                type : String
+            },
+            profileImage: {
+                type : String
             },
             text: {
                 type: String,

@@ -93,7 +93,7 @@ router.patch("/:id/follow", auth, async (req, res) => {
       await userProfile.save();
     }
 
-    res.json(myProfile);
+    res.json(userProfile.followers);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

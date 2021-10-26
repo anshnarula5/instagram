@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CREATE_POST, DELETE_POST, GET_POSTS, LIKE_POST, POST_ERROR } from "../type";
+import { COMMENT, CREATE_POST, DELETE_POST, GET_POSTS, LIKE_POST, POST_ERROR } from "../type";
 import { setAlert } from "./alerts";
 
 const url = "http://localhost:5000/api/posts";
@@ -46,5 +46,25 @@ export const deletePost = (id) => async (dispatch) => {
     dispatch({type : DELETE_POST, payload : id})
     dispatch(setAlert("Deleted post", "success"))
   } catch (error) {
+    dispatch({ type: POST_ERROR, payload : {msg : error.response.statusText, status : error.response.status} });
   }
 }
+
+export const comment = (id, text) => async (dispatch) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  try {
+    const res = await axios.post(`${url}/comment/${id}`, text, config);
+    console.log(res)
+    dispatch({ type: COMMENT, payload: res.data });
+  } catch (error) {
+    const errors = error.response.data.errors;
+    if (errors) {
+      errors.forEach((err) => dispatch(setAlert(err.msg, "danger")));
+    }
+    dispatch({ type: POST_ERROR, payload : {msg : error.response.statusText, status : error.response.status} });
+  }
+};

@@ -78,7 +78,7 @@ const validateComment = [
   check("text", "Comment is required").trim().not().isEmpty(),
 ];
 
-router.patch("/:id/comment", [validateComment, auth], async (req, res) => {
+router.post("/comment/:id", [validateComment, auth], async (req, res) => {
   const { id } = req.params;
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -86,21 +86,16 @@ router.patch("/:id/comment", [validateComment, auth], async (req, res) => {
   }
   const { text } = req.body;
   try {
-    const post = await Post.findById(id).populate("user", [
-      "username",
-      "profileImage",
-    ]);
+    const post = await Post.findById(id)
+    const user = await User.findById(req.user.id).select("-password")
     if (!post) {
       res.status(400).json({ message: "No post found" });
     }
-    const user = await User.findById(req.user.id).select([
-      "-password",
-      "-fullname",
-    ]);
-    const comment = { user, text };
+    const comment = { username : user.username, profileImage : user.profileImage , text };
     post.comments.unshift(comment);
     await post.save();
-    res.json(post);
+    res.json(post.comments);
+    console.log(post.comments)
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

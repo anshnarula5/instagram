@@ -17,7 +17,7 @@ const Profile = () => {
         "...loading"
       ) : (
         <div className="w-75 offset-md-2 d-flex flex-column">
-          <ProfileDetail profile={profile} />
+            <ProfileDetail profile={profile}/>
             <hr className="w-75" />
             <ProfilePost  profile={profile} />
         </div>

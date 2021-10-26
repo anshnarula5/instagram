@@ -1,4 +1,4 @@
-import { CREATE_POST, GET_POSTS, POST_ERROR, LIKE_POST, DELETE_POST } from "../type";
+import { CREATE_POST, GET_POSTS, POST_ERROR, LIKE_POST, DELETE_POST, COMMENT } from "../type";
 
 const initialState = {
   post: null,
@@ -26,6 +26,8 @@ const post = (state = initialState, action) => {
       };
     case DELETE_POST:
       return {...state, posts : state.posts.filter(post => post._id !== payload), loading : false }
+    case COMMENT:
+      return {...state, post : {...state.post, comments : payload}, loading : false}
     default:
       return state;
   }
