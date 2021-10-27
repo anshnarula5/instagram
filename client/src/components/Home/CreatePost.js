@@ -18,9 +18,7 @@ const CreatePost = () => {
   };
   const handleSubmit = () => {  
     dispatch(createPost(formData))
-    setTimeout(() => {
-      dispatch(getPosts())
-    }, 1500)
+    
     setPosted(true)
   }
   if (posted && !loading) {

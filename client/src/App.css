@@ -61,3 +61,32 @@ h6 {
 ::-webkit-scrollbar {
     display: none;
 }
+
+.profilepost{
+    position: relative;
+}
+
+  
+.profilepost img{
+    opacity: 1;
+    transition: .15s ease;
+    backface-visibility: hidden;
+  }
+  
+  .over {
+    transition: .15s ease;
+    opacity: 0;
+    position: absolute;
+    top: 45%;
+    left: 40%;
+    text-align: center;
+  }
+  
+  .profilepost:hover img {
+    opacity: 0.8;
+  }
+  
+  .profilepost:hover .over {
+    opacity: 1;
+  }
+  

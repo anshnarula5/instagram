@@ -121,7 +121,7 @@ const Post = ({post}) => {
                                 {user.username === comment.username && <small style = {{ cursor: "pointer"}}><small  onClick = {() => dispatch(deleteComment( post._id ,comment._id))}>Delete</small></small> }
                                 </section>
                               </section>
-                              <section className="px-2" onClick={() => dispatch(likeComment(post._id, comment._id))} >{!comment.likes.find(like => like._id === user._id) ? <i class="far fa-heart" style={{ cursor: "pointer" }} ></i>: <i class="fas fa-heart"style = {{color : "#fb3958",  cursor: "pointer"}}></i>}</section>
+                              <section className="px-2" onClick={() => dispatch(likeComment(post._id, comment._id))} >{!comment.likes.find(like => like._id === user._id) ? <i class="far fa-heart"  style={{ cursor: "pointer" }} ></i>: <i class="fas fa-heart"style = {{color : "#fb3958",  cursor: "pointer"}}></i>}</section>
                             </div>)}
                       </div>
                       </div>
