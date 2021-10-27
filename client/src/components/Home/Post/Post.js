@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import moment from "moment";
 
-import { comment, deletePost, likePost } from "../../../redux/actions/post";
+import { comment, deletePost, getPosts, likeComment, likePost, deleteComment, getPostById } from "../../../redux/actions/post";
 import { Link } from "react-router-dom";
-import Modal from "./Modal";
-const Post = ({ post }) => {
+
+const Post = ({post}) => {
   const [showText, setShowText] = useState(false);
   const [text, setText] = useState("");
   const user = useSelector((state) => state.auth.user);
@@ -21,15 +21,16 @@ const Post = ({ post }) => {
     setText(e.target.value);
   };
   const handleComment = () => {
-    dispatch(comment(post._id, { text }));
+    dispatch(comment(post._id, {text}))
     setText("");
   };
+  console.log(!post.likes.find(like => like.user === user._id))
   return (
     <>
       <div class="card w-75 offset-2  my-2  ">
         <div
           class="modal fade "
-          id="staticBackdrop"
+          id={`header${post._id}`}
           data-bs-backdrop="static"
           data-bs-keyboard="false"
           tabindex="-1"
@@ -73,7 +74,7 @@ const Post = ({ post }) => {
        
         <div
           class="modal fade"
-          id="exampleModal"
+          id={`body${post._id}`}
           tabindex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
@@ -91,7 +92,7 @@ const Post = ({ post }) => {
                         src={post.image}
                         class="card-img"
                         alt="..."
-                        style={{ borderRadius: "0%" }}
+                        style={{ height: "35rem", overflow: "hidden", display: "block", objectFit : "cover" , borderRadius: "0%"  }}
                       />
                     </div>
                     <div class="col-md-4 d-flex flex-column justify-content-between"  >
@@ -114,18 +115,64 @@ const Post = ({ post }) => {
                               <img src={comment.profileImage} style = {{borderRadius : "50%"}} width = "30rem" alt="" />
                                   <b className="mx-2">{comment.username}</b>
                                 {comment.text}
+                                <section className = "text-muted ">
+                                <small ><small>{moment(comment.date).fromNow(true)}</small></small>
+                                <small className = "mx-2"><small>{comment.likes.length} Likes</small></small>
+                                {user.username === comment.username && <small className = ""><small  onClick = {() => dispatch(deleteComment( post._id ,comment._id))}>Delete</small></small> }
+                                </section>
                               </section>
-                              <section className = "px-2"><i class="far fa-heart"></i></section>
+                              <section className = "px-2" onClick = {() => dispatch(likeComment(post._id, comment._id))}><i class="far fa-heart"></i></section>
                             </div>)}
                       </div>
                       </div>
-                      <div className="">
+                      <div className="border-top pt-1">
                       <section>
-                        actions
-                        likes
+                      <div className="d-flex justify-content-between">
+                            <p class="card-text fs-5 pb-1">
+                            
+                          {!post.likes.find(like => like.user === user._id) ? <i
+                            class="fas fa-heart"
+                            onClick={handleLike}
+                            style={{ cursor: "pointer" }}
+                          ></i> : <i
+                          class="far fa-heart"
+                          onClick={handleLike}
+                          style={{ cursor: "pointer" }}
+                        ></i>}
+                          <i class="far fa-comment mx-3" style={{ cursor: "pointer" }}></i>
+                          <i class="far fa-paper-plane" style={{ cursor: "pointer" }}></i>
+                        </p>
+                        <p class="card-text fs-5 px-2">
+                          <i class="far fa-bookmark" style={{ cursor: "pointer" }}></i>
+                        </p>
+                      </div>
+                      <small className="py-1">
+                      <b>{post.likes.length}</b> likes
+                          </small>
+                          <small>
+                            <small className="text-muted d-block mb-2">
+                              {moment(post.date).fromNow()}
+                            </small>
+                          </small>
                       </section>
-                      <section>
-                        addComment
+                      <section class="border-top py-1">
+                        <ul class="list-group list-group-flush d-flex flex-row align-items-center justify-content-between">
+                          <input
+                            class="list-group-item w-100"
+                            placeholder="Add comment"
+                            name="comment"
+                            value={text}
+                            style={{ borderBottom: "none" }}
+                            onChange={handleChange}
+                          ></input>
+                          <p
+                            className="px-2 text-primary"
+                            style={{ cursor: "pointer" }}
+                            onClick={handleComment}
+                          >
+                            share
+                          </p>
+                        </ul>
                       </section>
                       </div>
                     </div>
@@ -171,14 +218,14 @@ const Post = ({ post }) => {
             class="fas fa-ellipsis-h mx-3"
             style={{ cursor: "pointer" }}
             data-bs-toggle="modal"
-            data-bs-target="#staticBackdrop"
+            data-bs-target={`#header${post._id}`}
           ></i>
         </section>
         <img
           class="card-img-top postImage"
           src={post.image}
           alt="Card image cap"
-          style={{ maxHeight: "30rem", overflow: "hidden", display: "block" }}
+          style={{ maxHeight: "30rem", overflow: "hidden", display: "block", objectFit : "contain" }}
         />
         <div class="card-body">
           <div className="d-flex justify-content-between">
@@ -221,7 +268,7 @@ const Post = ({ post }) => {
               <p
                 style={{ cursor: "pointer" }}
                 data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
+                data-bs-target={`#body${post._id}`}
               >
                 View Comments
               </p>

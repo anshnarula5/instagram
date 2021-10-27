@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {Redirect} from "react-router";
-import {createPost} from "../../redux/actions/post";
+import {createPost, getPosts} from "../../redux/actions/post";
 
 const CreatePost = () => {
-  const { user, loading } = useSelector((state) => state.auth);
+  const {user, loading} = useSelector((state) => state.auth);
   const dispatch = useDispatch()
   const [formData, setFormData] = useState({
     image: "",
@@ -18,6 +18,9 @@ const CreatePost = () => {
   };
   const handleSubmit = () => {  
     dispatch(createPost(formData))
+    setTimeout(() => {
+      dispatch(getPosts())
+    }, 1500)
     setPosted(true)
   }
   if (posted && !loading) {

@@ -11,7 +11,7 @@ const Posts = () => {
     const {posts, loading} = useSelector(state => state.post)
     if (loading) return "..loading"
     if (posts && posts.length > 0) {
-        return posts.map(post => <Post post={post}/>)
+        return posts.map(post => <Post key = {post._id} post={post}/>)
     }
     return (
         "No posts yet"

@@ -91,7 +91,7 @@ router.post("/comment/:id", [validateComment, auth], async (req, res) => {
     if (!post) {
       res.status(400).json({ message: "No post found" });
     }
-    const comment = { username : user.username, profileImage : user.profileImage , text };
+    const comment = { username : user.username, profileImage : user.profileImage , text, userId : user._id };
     post.comments.unshift(comment);
     await post.save();
     res.json(post.comments);
@@ -121,7 +121,7 @@ router.patch("/:id/comment/:commentId/like", auth, async (req, res) => {
       res.status(404).json({ message: "no comment found" });
     }
     await post.save();
-    res.json(post);
+    res.json(comment.likes);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

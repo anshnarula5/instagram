@@ -1,5 +1,5 @@
 import axios from "axios";
-import { COMMENT, CREATE_POST, DELETE_POST, GET_POSTS, LIKE_POST, POST_ERROR } from "../type";
+import { COMMENT, CREATE_POST, DELETE_COMMENT, DELETE_POST, GET_POSTS, LIKE_COMMENT, LIKE_POST, POST_ERROR } from "../type";
 import { setAlert } from "./alerts";
 
 const url = "http://localhost:5000/api/posts";
@@ -59,7 +59,8 @@ export const comment = (id, text) => async (dispatch) => {
   try {
     const res = await axios.post(`${url}/comment/${id}`, text, config);
     console.log(res)
-    dispatch({ type: COMMENT, payload: res.data });
+    dispatch({type: COMMENT, payload: res.data});
+    dispatch(getPosts())
   } catch (error) {
     const errors = error.response.data.errors;
     if (errors) {
@@ -68,3 +69,23 @@ export const comment = (id, text) => async (dispatch) => {
     dispatch({ type: POST_ERROR, payload : {msg : error.response.statusText, status : error.response.status} });
   }
 };
+
+export const likeComment = (id, commentId) => async (dispatch) => {
+  try {
+    const res = await axios.patch(`${url}/${id}/comment/${commentId}/like`);
+    dispatch({ type: LIKE_COMMENT, payload : { commentId, likes : res.data, id}});
+    dispatch(getPosts())
+  } catch (error) {
+    console.log(error)
+  }
+};
+
+export const deleteComment = (id, commentId) => async (dispatch) => {
+  try {
+    const res = await axios.delete(`${url}/${id}/comment/${commentId}/`)
+    dispatch({type: DELETE_COMMENT, payload: {id, commentId}})
+    dispatch(getPosts())
+  } catch (error) {
+    console.log(error)
+  }
+}
