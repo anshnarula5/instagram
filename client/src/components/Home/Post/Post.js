@@ -118,26 +118,25 @@ const Post = ({post}) => {
                                 <section className = "text-muted ">
                                 <small ><small>{moment(comment.date).fromNow(true)}</small></small>
                                 <small className = "mx-2"><small>{comment.likes.length} Likes</small></small>
-                                {user.username === comment.username && <small className = ""><small  onClick = {() => dispatch(deleteComment( post._id ,comment._id))}>Delete</small></small> }
+                                {user.username === comment.username && <small style = {{ cursor: "pointer"}}><small  onClick = {() => dispatch(deleteComment( post._id ,comment._id))}>Delete</small></small> }
                                 </section>
                               </section>
-                              <section className = "px-2" onClick = {() => dispatch(likeComment(post._id, comment._id))}><i class="far fa-heart"></i></section>
+                              <section className="px-2" onClick={() => dispatch(likeComment(post._id, comment._id))} >{!comment.likes.find(like => like._id === user._id) ? <i class="far fa-heart" style={{ cursor: "pointer" }} ></i>: <i class="fas fa-heart"style = {{color : "#fb3958",  cursor: "pointer"}}></i>}</section>
                             </div>)}
                       </div>
                       </div>
                       <div className="border-top pt-1">
                       <section>
                       <div className="d-flex justify-content-between">
-                            <p class="card-text fs-5 pb-1">
-                            
+                        <p class="card-text fs-5 pb-1">
                           {!post.likes.find(like => like.user === user._id) ? <i
-                            class="fas fa-heart"
+                            class="far fa-heart"
                             onClick={handleLike}
                             style={{ cursor: "pointer" }}
                           ></i> : <i
-                          class="far fa-heart"
+                          class="fas fa-heart"
                           onClick={handleLike}
-                          style={{ cursor: "pointer" }}
+                          style={{ cursor: "pointer", color: "#fb3958" }}
                         ></i>}
                           <i class="far fa-comment mx-3" style={{ cursor: "pointer" }}></i>
                           <i class="far fa-paper-plane" style={{ cursor: "pointer" }}></i>
@@ -230,11 +229,15 @@ const Post = ({post}) => {
         <div class="card-body">
           <div className="d-flex justify-content-between">
             <p class="card-text fs-5">
-              <i
-                class="far fa-heart"
+                {!post.likes.find(like => like.user === user._id) ? <i
+                  class="far fa-heart"
+                  onClick={handleLike}
+                  style={{ cursor: "pointer" }}
+                ></i> : <i
+                class="fas fa-heart like"
                 onClick={handleLike}
-                style={{ cursor: "pointer" }}
-              ></i>
+                style={{ cursor: "pointer", color: "#fb3958" }}
+              ></i>}          
               <i class="far fa-comment mx-3" style={{ cursor: "pointer" }}></i>
               <i class="far fa-paper-plane" style={{ cursor: "pointer" }}></i>
             </p>
