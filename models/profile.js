@@ -21,10 +21,18 @@ const profileSchema = new Schema({
   email: {
     type: String,
   },
-  followers: {
-    type: [Schema.Types.ObjectId],
-    ref: User,
-  },
+  followers: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: User,
+    },
+  ],
+  following: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: User,
+    },
+  ],
   following: {
     type: [Schema.Types.ObjectId],
     ref: User,

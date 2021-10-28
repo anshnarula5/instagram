@@ -10,7 +10,8 @@ export const getPosts = () => async (dispatch) => {
     const res = await axios.get(`${url}`);
     dispatch({ type: GET_POSTS, payload: res.data });
   } catch (error) {
-    dispatch({ type: POST_ERROR, payload : {msg : error.response.statusText, status : error.response.status} });
+    // dispatch({ type: POST_ERROR, payload : {msg : error.response.statusText, status : error.response.status} });
+    console.log(error)
   }
 };
 
@@ -22,7 +23,8 @@ export const createPost = (formData) => async (dispatch) => {
   };
   try {
     const res = await axios.post(`${url}`, formData, config);
-    dispatch({ type: CREATE_POST, payload: res.data });
+    dispatch({type: CREATE_POST, payload: res.data});
+    
   } catch (error) {
     const errors = error.response.data.errors;
     if (errors) {

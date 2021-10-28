@@ -1,4 +1,4 @@
-import { EDIT_PROFILE, GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE, FOLLOW } from "../type";
+import { EDIT_PROFILE, GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE, FOLLOW, GET_ALL_PROFILES } from "../type";
 
 const initialState = {
   profile: null,
@@ -18,6 +18,8 @@ const profile = (state = initialState, action) => {
       return { ...state, profile: null, loading: false, error: payload };
     case FOLLOW:
       return {...state, profile: {...state.profile, followers : payload }, loading: false}
+    case GET_ALL_PROFILES:
+      return {...state, profiles : payload , loading : false}
     default:
       return state;
   }

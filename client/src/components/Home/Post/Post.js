@@ -24,7 +24,6 @@ const Post = ({post}) => {
     dispatch(comment(post._id, {text}))
     setText("");
   };
-  console.log(!post.likes.find(like => like.user === user._id))
   return (
     <>
       <div class="card w-75 offset-2  my-2  ">

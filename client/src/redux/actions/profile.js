@@ -1,5 +1,5 @@
 import axios from "axios"
-import {EDIT_PROFILE, FOLLOW, GET_PROFILE, PROFILE_ERROR} from "../type"
+import {EDIT_PROFILE, FOLLOW, GET_PROFILE, PROFILE_ERROR, GET_ALL_PROFILES} from "../type"
 import {setAlert} from "./alerts"
 
 //Get my profile
@@ -10,6 +10,14 @@ export const getProfile = () => async (dispatch) => {
     try {
         const res = await axios.get(`${url}/api/profile/me`)
         dispatch({type : GET_PROFILE, payload : res.data})
+    } catch (error) {
+        dispatch({type : PROFILE_ERROR})
+    }
+}
+export const getAllProfiles = () => async (dispatch) => {
+    try {
+        const res = await axios.get(`${url}/api/profile`)
+        dispatch({type : GET_ALL_PROFILES, payload : res.data})
     } catch (error) {
         dispatch({type : PROFILE_ERROR})
     }
@@ -42,7 +50,8 @@ export const getProfileById = (id) => async dispatch => {
 export const follow = (id) => async (dispatch) => {
     try {
         const res = await axios.patch(`${url}/api/profile/${id}/follow`)
-        dispatch({type : FOLLOW, payload : res.data})
+        dispatch({type: FOLLOW, payload: res.data})
+        dispatch(getAllProfiles())
     } catch (error) {
         dispatch({type : PROFILE_ERROR})
     }

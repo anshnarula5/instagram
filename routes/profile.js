@@ -24,6 +24,23 @@ router.get("/me", auth, async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+//Get All profiles
+
+router.get("/", auth, async (req, res) => {
+  try {
+    const profiles = await Profile.find({})
+      .populate("user", ["username", "profileImage", "fullname"])
+
+    if (!profiles) {
+      return res
+        .status(404)
+        .json({ message: "No profile found for this user" });
+    }
+    res.json(profiles);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 //Update Profile
 
