@@ -19,7 +19,7 @@ const EditProfile = () => {
       email: loading || !profile.email ? "" :  profile.email,
       gender: loading || !profile.gender ? "" :  profile.gender,
     });
-  }, [dispatch, loading, profile]);
+  }, [dispatch, loading]);
   const [formData, setFormData] = useState({
     username: "",
     image: "",

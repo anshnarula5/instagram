@@ -11,7 +11,7 @@ export const getPosts = () => async (dispatch) => {
     dispatch({type: GET_POSTS, payload: res.data});
     dispatch(getProfile())
   } catch (error) {
-    // dispatch({ type: POST_ERROR, payload : {msg : error.response.statusText, status : error.response.status} });
+    dispatch({ type: POST_ERROR, payload : {msg : error.response.statusText, status : error.response.status} });
     console.log(error)
   }
 };
@@ -27,6 +27,7 @@ export const createPost = (formData) => async (dispatch) => {
     dispatch({type: CREATE_POST, payload: res.data});
     
   } catch (error) {
+    dispatch(setAlert("File too large", "danger"))
     const errors = error.response.data.errors;
     if (errors) {
       errors.forEach((err) => dispatch(setAlert(err.msg, "danger")));

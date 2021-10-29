@@ -92,8 +92,8 @@ small {
   
 .loader {
     margin: 100px auto;
-    height: 80px;
-    width: 80px;
+    height: 60px;
+    width: 60px;
     box-sizing: border-box;
     display: flex;
     position: relative;
@@ -106,8 +106,8 @@ small {
   }
   .loader:after,
   .loader:before {
-    height: 120px;
-    width: 120px;
+    height: 60px;
+    width: 60px;
     border-radius: 50%;
     border-style: solid;
     border-width: 2px;
@@ -168,3 +168,7 @@ small {
     width: 100%;
   }
   
+  a{
+    text-decoration: none;
+    color: black;
+  }

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { follow, getAllProfiles } from "../../redux/actions/profile";
-
+import { Link } from "react-router-dom";
 const Profiles = () => {
   let { profiles, loading, profile } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
@@ -24,15 +24,24 @@ const Profiles = () => {
                   key={profile._id}
                   className="d-flex p-3 justify-content-between align-items-center"
                 >
-                  <img
-                    style={{ borderRadius: "50%", objectFit : "cover" }}
-                    width="40rem"
-                    height="40rem"
-                    src={profile.user.profileImage}
-                    alt=""
-                  />
+                  <Link
+                    to={`/profile/${profile.user._id}` }
+                    className="mx-1"
+                  ><img
+                  style={{ borderRadius: "50%", objectFit : "cover" }}
+                  width="40rem"
+                  height="40rem"
+                  src={profile.user.profileImage}
+                  alt=""
+                /></Link>
                   <div className="flex-grow-1 mx-3">
-                    <h6 className=" d-inline">{profile.user.username}</h6>
+                  <Link
+                    to={`/profile/${profile.user._id}` }
+                      className="mx-1"
+                      
+                  >
+                    <h6 className=" d-inline">{profile.user.username}</h6> 
+                    </Link>
                     <small className="text-muted d-block">
                       {profile.user.fullname}
                     </small>

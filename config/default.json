@@ -1,4 +1,4 @@
 {
-    "mongoURI" : "mongodb://localhost:27017/insta",
-    "jwtsecret" : "secret"
+    "mongoURI": "mongodb+srv://ansh:ansh123@cluster0.pl7m9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "jwtsecret": "secret"
 }

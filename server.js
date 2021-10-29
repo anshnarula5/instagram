@@ -7,8 +7,10 @@ const app = express();
 
 connectDB();
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: "30mb", extended: true }));
 app.use(cors());
-app.use(express.json());
+
 
 //routes
 

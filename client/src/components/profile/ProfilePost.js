@@ -12,7 +12,7 @@ const ProfilePost = ({profile}) => {
         { !posts && posts.length === 0
           ? "No posts"
           : posts.map((post) => (
-            <PostElement post={post} key={post._id} profile={profile}/>
+            <PostElement post={post} key={post._id} profile={profile} myProfile={true}/>
             ))}
       </div>
     </>

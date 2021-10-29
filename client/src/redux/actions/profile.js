@@ -1,10 +1,17 @@
 import axios from "axios"
-import {EDIT_PROFILE, FOLLOW, GET_PROFILE, PROFILE_ERROR, GET_ALL_PROFILES} from "../type"
+import {EDIT_PROFILE, FOLLOW, GET_PROFILE, PROFILE_ERROR, GET_ALL_PROFILES, CLEAR_PROFILE} from "../type"
 import {setAlert} from "./alerts"
 
 //Get my profile
 
 const url = "http://localhost:5000"
+export const clearProfile = () => async (dispatch) => {
+    try {
+        dispatch({type : CLEAR_PROFILE})
+    } catch (error) {
+        dispatch({type : PROFILE_ERROR})
+    }
+}
 
 export const getProfile = () => async (dispatch) => {
     try {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import {
@@ -9,7 +9,7 @@ import {
   deleteComment,
 } from "../../redux/actions/post";
 
-const PostElement = ({ post, profile, explore }) => {
+const PostElement = ({ post, profile, explore, myProfile }) => {
   const [text, setText] = useState("");
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
@@ -60,19 +60,50 @@ const PostElement = ({ post, profile, explore }) => {
                   </div>
                   <div className="col-md-4 d-flex flex-column justify-content-between">
                     <div className="">
-                      <section className="py-3 border-bottom d-flex justify-content-between">
+                      <section className="py-3 border-bottom d-flex justify-content-between align-items-center">
                         <section>
+                          {myProfile ? (
+                            <>
+                              <img
+                                data-bs-dismiss="modal"
+                                style={{
+                                  borderRadius: "50%",
+                                  objectFit: "cover",
+                                }}
+                                src={
+                                  explore
+                                    ? post.user.profileImage
+                                    : profile.user.profileImage
+                                }
+                                width="30rem"
+                                height="30rem"
+                                alt=""
+                              />
+                              <h6
+                                className="mx-3 d-inline"
+                                data-bs-dismiss="modal"
+                              >
+                                {explore
+                                  ? post.user.username
+                                  : profile.user.username}
+                              </h6>
+                            </>
+                          ) : (
+                            <>
                               <Link
-                                  to={
-                                    post.user._id === user._id
-                                      ? "/profile/me"
-                                      : `/profile/${post.user._id}`
-                                  }
-                                  className="mx-1"
-                                >
-                            <img
-                              data-bs-dismiss="modal"
-                                  style={{ borderRadius: "50%", objectFit : "cover" }}
+                                to={
+                                  post.user._id === user._id
+                                    ? "/profile/me"
+                                    : `/profile/${post.user._id}`
+                                }
+                                className="mx-1"
+                              >
+                                <img
+                                  data-bs-dismiss="modal"
+                                  style={{
+                                    borderRadius: "50%",
+                                    objectFit: "cover",
+                                  }}
                                   src={
                                     explore
                                       ? post.user.profileImage
@@ -82,29 +113,40 @@ const PostElement = ({ post, profile, explore }) => {
                                   height="30rem"
                                   alt=""
                                 />
-                                </Link>
-                                <Link
-                                  to={
-                                    post.user._id === user._id
-                                      ? "/profile/me"
-                                      : `/profile/${post.user._id}`
-                                  }
-                                  style={{ textDecoration: "none", color: "black" }}
+                              </Link>
+                              <Link
+                                to={
+                                  post.user._id === user._id
+                                    ? "/profile/me"
+                                    : `/profile/${post.user._id}`
+                                }
+                                style={{
+                                  textDecoration: "none",
+                                  color: "black",
+                                }}
+                              >
+                                <h6
+                                  className="mx-3 d-inline"
+                                  data-bs-dismiss="modal"
                                 >
-                                   <h5 className="mx-3 d-inline" data-bs-dismiss="modal">
-                                      {explore
-                                        ? post.user.username
-                                        : profile.user.username}
-                                    </h5>
-                                </Link>
+                                  {explore
+                                    ? post.user.username
+                                    : profile.user.username}
+                                </h6>
+                              </Link>
+                            </>
+                          )}
                         </section>
                         <p>actions</p>
                       </section>
                       <div className="commentsection">
-                        {post.text && (
+                        {/* {post.text && (
                           <div className="py-2">
                             <img
-                              style={{ borderRadius: "50%", objectFit : "cover" }}
+                              style={{
+                                borderRadius: "50%",
+                                objectFit: "cover",
+                              }}
                               src={post.user.profileImage}
                               width="30rem"
                               height="30rem"
@@ -113,18 +155,24 @@ const PostElement = ({ post, profile, explore }) => {
                             <h6 className="mx-3">{post.user.username}</h6>{" "}
                             {post.text}
                           </div>
-                        )}
+                        )} */}
                         {post.comments.map((comment) => (
-                          <div className="py-3 d-flex justify-content-between" key={comment._id}>
+                          <div
+                            className="py-3 d-flex justify-content-between align-items-center"
+                            key={comment._id}
+                          >
                             <section>
                               <img
                                 src={comment.profileImage}
-                                style={{ borderRadius: "50%" , objectFit : "cover"}}
-                                width="30rem"
-                                height="30rem"
+                                style={{
+                                  borderRadius: "50%",
+                                  objectFit: "cover",
+                                }}
+                                width="25rem"
+                                height="25rem"
                                 alt=""
                               />
-                              <h6 className="mx-2 d-inline">
+                              <h6 className="mx-2 d-inline ">
                                 {comment.username}
                               </h6>
                               {comment.text}
@@ -160,7 +208,11 @@ const PostElement = ({ post, profile, explore }) => {
                               className="px-2"
                               onClick={() =>
                                 dispatch(
-                                  likeComment(post._id, comment._id, profile.user._id)
+                                  likeComment(
+                                    post._id,
+                                    comment._id,
+                                    profile.user._id
+                                  )
                                 )
                               }
                             >

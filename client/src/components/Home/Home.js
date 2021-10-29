@@ -1,11 +1,20 @@
-import React from "react";
+import React, {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {getAllProfiles, getProfile} from "../../redux/actions/profile";
 import Posts from "./Posts";
+import Profiles from "./Profiles";
 import Right from "./Right";
 
 const Home = () => {
+  const {profile, loading} = useSelector(state => state.profile)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getProfile())
+  }, [dispatch])
+  if (loading) return <div className="pt-5"><div className="loader py-5"></div></div>;
   return (
     <>
-      <div className="w-75 offset-md-1">
+      {profile?.following && profile?.following.length > 0 ? <div className="w-75 offset-md-1">
         <div className="row">
           <div className="col-md-8 mt-4 ">
             <Posts />
@@ -16,7 +25,13 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> :
+        <div className="row">
+        <div className="col-md-8 offset-md-2 mt-4 ">
+          <Profiles />
+        </div>
+    </div>
+      }
     </>
   );
 };

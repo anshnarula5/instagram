@@ -26,14 +26,14 @@ const ProfileDetail = ({ profile }) => {
         </div>
         <div className="col-md-7 col-sm-8 mt-3 d-flex flex-column">
           <div className="d-flex align-items-center">
-            <p className="d-inline display-6 mr-md-3">{profile.user.username}</p>
+            <h4 className="d-inline mr-md-3">{profile.user.username}</h4>
             {profile.user._id === user._id ? (
               <Link className="btn btn-outline-dark mx-md-3" to="/profile/edit">
                 Edit profile
               </Link>
             ) : !isFollowing ? (
               <button
-                className="btn btn-primary px-4 mx-3"
+                className="btn btn-primary px-2 mx-2"
                 onClick={handleFollow}
               >
                 Follow
@@ -41,12 +41,12 @@ const ProfileDetail = ({ profile }) => {
             ) : (
                   <>
                   <button
-                className="btn btn-outline-dark btn-sm px-2 mx-3"
+                className="btn btn-outline-dark btn-sm px-2 mx-2"
               >
                 message
               </button>
                   <button
-                className="btn btn-outline-dark btn-sm px-3"
+                className="btn btn-outline-dark btn-sm px-2"
                 onClick={handleFollow}
               >
                 <i className="fas fa-user-check"></i>
