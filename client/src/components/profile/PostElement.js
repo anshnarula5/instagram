@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import { Link } from "react-router-dom";
 import moment from "moment";
 import {
   comment,
@@ -8,7 +9,7 @@ import {
   deleteComment,
 } from "../../redux/actions/post";
 
-const PostElement = ({ post, profile }) => {
+const PostElement = ({ post, profile, explore }) => {
   const [text, setText] = useState("");
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
@@ -19,7 +20,11 @@ const PostElement = ({ post, profile }) => {
     setText(e.target.value);
   };
   const handleComment = () => {
-    dispatch(comment(post._id, { text }, user._id));
+    if (explore) {
+      dispatch(comment(post._id, { text }));
+    } else {
+      dispatch(comment(post._id, { text }, profile.user._id));
+    }
     setText("");
   };
   return (
@@ -57,15 +62,41 @@ const PostElement = ({ post, profile }) => {
                     <div className="">
                       <section className="py-3 border-bottom d-flex justify-content-between">
                         <section>
-                          <img
-                            style={{ borderRadius: "50%" }}
-                            src={profile.user.profileImage}
-                            width="30rem"
-                            alt=""
-                          />
-                          <strong className="mx-3">
-                            {profile.user.username}
-                          </strong>
+                              <Link
+                                  to={
+                                    post.user._id === user._id
+                                      ? "/profile/me"
+                                      : `/profile/${post.user._id}`
+                                  }
+                                  className="mx-1"
+                                >
+                            <img
+                              data-bs-dismiss="modal"
+                                  style={{ borderRadius: "50%", objectFit : "cover" }}
+                                  src={
+                                    explore
+                                      ? post.user.profileImage
+                                      : profile.user.profileImage
+                                  }
+                                  width="30rem"
+                                  height="30rem"
+                                  alt=""
+                                />
+                                </Link>
+                                <Link
+                                  to={
+                                    post.user._id === user._id
+                                      ? "/profile/me"
+                                      : `/profile/${post.user._id}`
+                                  }
+                                  style={{ textDecoration: "none", color: "black" }}
+                                >
+                                   <h5 className="mx-3 d-inline" data-bs-dismiss="modal">
+                                      {explore
+                                        ? post.user.username
+                                        : profile.user.username}
+                                    </h5>
+                                </Link>
                         </section>
                         <p>actions</p>
                       </section>
@@ -73,14 +104,13 @@ const PostElement = ({ post, profile }) => {
                         {post.text && (
                           <div className="py-2">
                             <img
-                              style={{ borderRadius: "50%" }}
+                              style={{ borderRadius: "50%", objectFit : "cover" }}
                               src={post.user.profileImage}
                               width="30rem"
+                              height="30rem"
                               alt=""
                             />
-                            <strong className="mx-3">
-                              {post.user.username}
-                            </strong>{" "}
+                            <h6 className="mx-3">{post.user.username}</h6>{" "}
                             {post.text}
                           </div>
                         )}
@@ -89,11 +119,14 @@ const PostElement = ({ post, profile }) => {
                             <section>
                               <img
                                 src={comment.profileImage}
-                                style={{ borderRadius: "50%" }}
+                                style={{ borderRadius: "50%" , objectFit : "cover"}}
                                 width="30rem"
+                                height="30rem"
                                 alt=""
                               />
-                              <b className="mx-2">{comment.username}</b>
+                              <h6 className="mx-2 d-inline">
+                                {comment.username}
+                              </h6>
                               {comment.text}
                               <section className="text-muted ">
                                 <small>
@@ -109,7 +142,11 @@ const PostElement = ({ post, profile }) => {
                                     <small
                                       onClick={() =>
                                         dispatch(
-                                          deleteComment(post._id, comment._id, user._id)
+                                          deleteComment(
+                                            post._id,
+                                            comment._id,
+                                            profile.user._id
+                                          )
                                         )
                                       }
                                     >
@@ -122,7 +159,9 @@ const PostElement = ({ post, profile }) => {
                             <section
                               className="px-2"
                               onClick={() =>
-                                dispatch(likeComment(post._id, comment._id, user._id))
+                                dispatch(
+                                  likeComment(post._id, comment._id, profile.user._id)
+                                )
                               }
                             >
                               {!comment.likes.find(

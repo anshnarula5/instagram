@@ -16,6 +16,7 @@ import EditProfile from "./components/profile/EditProfile";
 import CreatePost from "./components/Home/CreatePost";
 
 import ProfileById from "./components/profile/ProfileById"
+import Explore from "./components/Home/Explore";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -41,6 +42,7 @@ function App() {
             <PrivateRoute exact path="/profile/edit" component={EditProfile} />
             <PrivateRoute exact path="/create" component={CreatePost} />
             <PrivateRoute exact path={`/profile/:id`} component={ProfileById} />
+            <PrivateRoute exact path="/explore" component={Explore} />
             <Redirect to ="/" />
           </Switch>
         </div>

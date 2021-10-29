@@ -62,8 +62,6 @@ const Post = ({post}) => {
               )}
               <div className="my-2">Open post</div>
               <hr />
-              <div className="my-2">Open post</div>
-              <hr />
               <div className="my-2" data-bs-dismiss="modal">
                 Close
               </div>
@@ -98,20 +96,20 @@ const Post = ({post}) => {
                       <div className="">
                         <section className = "py-3 border-bottom d-flex justify-content-between">
                           <section>
-                          <img style = {{borderRadius : "50%"}} src={post.user.profileImage} width = "30rem" alt="" />
-                          <strong className = "mx-3">{post.user.username}</strong>
+                          <img style = {{borderRadius : "50%", objectFit : "cover"}} src={post.user.profileImage} width = "30rem" height = "30rem" alt="" />
+                          <h6 className = "mx-3 d-inline">{post.user.username}</h6>
                           </section>
-                          <p>actions</p>
+                          <p className = "fs-5 px-2"><i class="fas fa-ellipsis-h"></i></p>
                         </section>
                         <div className="commentsection">
                           {post.text && <div className="py-2">
-                            <img style={{borderRadius: "50%"}} src={post.user.profileImage} width="30rem" alt="" />
+                            <img style={{borderRadius: "50%", objectFit : "cover"}} src={post.user.profileImage} height = "30rem" width="30rem" alt="" />
                             <strong className="mx-3">{post.user.username}</strong> {post.text}
                           </div>}
                           {post.comments.map(comment =>
                             <div className="py-3 d-flex justify-content-between">
                               <section>
-                              <img src={comment.profileImage} style = {{borderRadius : "50%"}} width = "30rem" alt="" />
+                              <img src={comment.profileImage} style = {{borderRadius : "50%" , objectFit : "cover"}} height = "30rem"  width = "30rem" alt="" />
                                   <b className="mx-2">{comment.username}</b>
                                 {comment.text}
                                 <section className = "text-muted ">
@@ -194,8 +192,9 @@ const Post = ({post}) => {
                 src={post.user.profileImage}
                 alt=""
                 width="30rem"
+                height="30rem"
                 className="postImage"
-                style={{ borderRadius: "50%", margin: "0px 8px" }}
+                style={{ borderRadius: "50%", margin: "0px 8px", objectFit : "cover" }}
               />
             </Link>
             <div className="d-flex flex-column">

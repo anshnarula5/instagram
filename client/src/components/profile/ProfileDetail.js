@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { follow } from "../../redux/actions/profile";
-import { getProfile } from "../../redux/actions/profile";
 
 const ProfileDetail = ({ profile }) => {
   const user = useSelector((state) => state.auth.user);
@@ -21,7 +20,7 @@ const ProfileDetail = ({ profile }) => {
         <div className="col-md-5 col-sm-4 text-center mt-3">
           <img
             src={profile.user.profileImage}
-            style={{ width: "10rem", borderRadius: "50%" }}
+            style={{ width: "10rem",  height: "10rem", borderRadius: "50%", objectFit : "cover" }}
             alt=""
           />
         </div>
@@ -32,7 +31,7 @@ const ProfileDetail = ({ profile }) => {
               <Link className="btn btn-outline-dark mx-md-3" to="/profile/edit">
                 Edit profile
               </Link>
-            ) : isFollowing ? (
+            ) : !isFollowing ? (
               <button
                 className="btn btn-primary px-4 mx-3"
                 onClick={handleFollow}

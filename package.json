@@ -23,6 +23,7 @@
     "moment": "^2.29.1",
     "mongoose": "^6.0.11",
     "nodemon": "^2.0.14",
+    "react-file-base64": "^1.0.3",
     "react-moment": "^1.1.1",
     "react-router-dom": "^5.3.0",
     "redux-devtools-extension": "^2.13.9",

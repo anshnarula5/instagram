@@ -47,7 +47,7 @@ const Navbar = () => {
                 </Link>
               </li>
               <li class="nav-item fs-4 mx-1">
-                <Link class="nav-link active" aria-current="page" to="/">
+                <Link class="nav-link active" aria-current="page" to="/explore">
                 <i class="far fa-compass"></i>
                 </Link>
               </li>
@@ -57,7 +57,8 @@ const Navbar = () => {
                 </Link>
               </li>
               
-              <li class="nav-item dropdown fs-4 mx-1">
+                 
+              <li class="nav-item dropdown fs-4 mx-1" >
                 <a
                   class="nav-link dropdown-toggle"
                   href="#"

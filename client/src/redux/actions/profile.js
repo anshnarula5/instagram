@@ -32,7 +32,20 @@ export const editProfile = (formData) => async (dispatch) => {
           };
         const res = await axios.patch(`${url}/api/profile/edit`, formData, config)
         dispatch({type: EDIT_PROFILE, payload: res.data})
-        dispatch(setAlert("Update Profile", "success"))
+        dispatch(setAlert("Updated Profile", "success"))
+    } catch (error) {
+        dispatch({type : PROFILE_ERROR})
+    }
+}
+export const editImage = (formData) => async (dispatch) => {
+    try {
+        const config = {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          };
+        const res = await axios.patch(`${url}/api/auth/editImage`, formData, config)
+        dispatch(setAlert("Updated Image", "success"))
     } catch (error) {
         dispatch({type : PROFILE_ERROR})
     }
@@ -51,7 +64,7 @@ export const follow = (id) => async (dispatch) => {
     try {
         const res = await axios.patch(`${url}/api/profile/${id}/follow`)
         dispatch({type: FOLLOW, payload: res.data})
-        dispatch(getAllProfiles())
+        dispatch(getAllProfiles( ))
     } catch (error) {
         dispatch({type : PROFILE_ERROR})
     }

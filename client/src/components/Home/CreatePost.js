@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {Redirect} from "react-router";
 import {createPost, getPosts} from "../../redux/actions/post";
+import FileBase from "react-file-base64"
 
 const CreatePost = () => {
   const {user, loading} = useSelector((state) => state.auth);
@@ -18,7 +19,6 @@ const CreatePost = () => {
   };
   const handleSubmit = () => {  
     dispatch(createPost(formData))
-    
     setPosted(true)
   }
   if (posted && !loading) {
@@ -37,6 +37,7 @@ const CreatePost = () => {
                   {image ? (
                     <img src={image} class="img-fluid virtual" alt="example " />
                   ) : (
+                    
                     <img
                       src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg"
                       class="img-fluid virtual"
@@ -46,13 +47,10 @@ const CreatePost = () => {
                 </div>
                 <div class="d-flex justify-content-center">
                   <div class="btn btn-mdb-color btn-rounded float-left">
-                    <textarea
-                      className="list-group-item "
-                      type="text"
-                      name="image"
-                      placeholder="Add image"
-                      onChange={handleChange}
-                      value={image}
+                    <FileBase
+                      type="file"
+                      multiple={false}
+                      onDone={({base64}) => setFormData({...formData, image : base64})}
                     />
                   </div>
                 </div>

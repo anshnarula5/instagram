@@ -30,10 +30,6 @@ const Posts = () => {
     );
   }
 
-    const myPosts = posts.filter((post) => post?.user._id === profile.user._id);
-
-    console.log(myPosts)
-    
 
   if (filteredPosts && filteredPosts.length > 0) {
     return filteredPosts.map((post) => <Post key={post._id} post={post} />);

@@ -3,14 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { follow, getAllProfiles } from "../../redux/actions/profile";
 
 const Profiles = () => {
+  let { profiles, loading, profile } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllProfiles());
   }, [dispatch]);
-  let { profiles, loading, profile } = useSelector((state) => state.profile);
-  const { user } = useSelector((state) => state.auth);
-  profiles = profiles.filter((p) => p._id !== profile._id);
+   const { user } = useSelector((state) => state.auth);
   if (loading) return "...Loading";
+ 
+  profiles = profiles.filter((p) => p?._id !== profile?._id)
   return (
     <>
       <div className="row">
@@ -24,9 +25,10 @@ const Profiles = () => {
                   className="d-flex p-3 justify-content-between align-items-center"
                 >
                   <img
-                    style={{ borderRadius: "50%" }}
-                    src={profile.user.profileImage}
+                    style={{ borderRadius: "50%", objectFit : "cover" }}
                     width="40rem"
+                    height="40rem"
+                    src={profile.user.profileImage}
                     alt=""
                   />
                   <div className="flex-grow-1 mx-3">
@@ -50,9 +52,10 @@ const Profiles = () => {
                           <div class="modal-content ">
                             <div class=" d-flex flex-column mt-3 align-items-center justify-content-center">
                               <img
-                                style={{ borderRadius: "50%" }}
-                                src={profile.user.profileImage}
+                                style={{ borderRadius: "50%", objectFit : "cover" }}
                                 width="80rem"
+                                height="80rem"
+                                src={profile.user.profileImage}
                                 alt=""
                               />
                               <p className="my-3">
@@ -61,11 +64,14 @@ const Profiles = () => {
                             </div>
                             <hr />
                             <div class="text-center text-danger my-2">
-                              <p>Unfollow</p>
+                              <p style = {{cursor : "pointer"}}  data-bs-dismiss="modal"  onClick={() => {
+                                dispatch(follow(profile._id));
+                                
+                                }} >Unfollow</p>
                             </div>{" "}
                             <hr />
                             <div class="text-center my-2">
-                              <p data-bs-dismiss="modal">Close</p>
+                              <p style = {{cursor : "pointer"}} data-bs-dismiss="modal">Close</p>
                             </div>{" "}
                             <hr />
                           </div>
@@ -75,9 +81,7 @@ const Profiles = () => {
                         className="btn btn-outline-dark"
                         data-bs-toggle="modal"
                         data-bs-target="#exampleModal"
-                        onClick={() => {
-                          dispatch(follow(profile._id));
-                        }}
+                       
                       >
                         following
                       </button>

@@ -61,4 +61,18 @@ router.post("/", loginValidator, async (req, res) => {
   }
 });
 
+//Update Image
+
+router.patch("/editImage", auth, async (req, res) => {
+  const {image} = req.body
+  try {
+    const user = await User.findById(req.user.id).select("-password")
+    user.profileImage = image
+    await user.save();
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
 module.exports = router

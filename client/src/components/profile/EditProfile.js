@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {Redirect, useHistory} from "react-router";
+import {useDispatch, useSelector} from "react-redux";
+import FileBase from "react-file-base64"
 import {Link} from "react-router-dom";
-import { editProfile, getProfile } from "../../redux/actions/profile";
+import { editImage, editProfile, getProfile } from "../../redux/actions/profile";
 
 const EditProfile = () => {
   const dispatch = useDispatch();
@@ -12,6 +12,7 @@ const EditProfile = () => {
     dispatch(getProfile());
     setFormData({
       username: loading || !profile.user ? "" : profile.user.username,
+      image: loading || !profile.user ? "" : profile.user.profileImage,
       fullname: loading || !profile.user ? "" :  profile.user.fullname,
       bio: loading || !profile.bio ? "" :  profile.bio,
       website: loading || !profile.website ? "" :  profile.website,
@@ -21,6 +22,7 @@ const EditProfile = () => {
   }, [dispatch, loading]);
   const [formData, setFormData] = useState({
     username: "",
+    image: "",
     fullname:"",
     bio: "",
     website: "",
@@ -28,24 +30,55 @@ const EditProfile = () => {
     gender:"",
   });
   
-  const { username, fullname, bio, website, email, gender } = formData;
+  const { username, fullname, bio, website, email, gender, image } = formData;
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(editProfile(formData))
+    dispatch(editImage({image}))
   }
+
   if (loading) {
     return "...Loading";
   }
   return (
     <>
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm ">
+          <div class="modal-content text-center">
+              <h5 className = "py-3">Change Profile Photo</h5><hr />
+            <p className="py-2 text-primary" data-bs-dismiss="modal" >Add new photo
+              <div className = "imageInput">
+                <FileBase
+                    type="file"
+                    multiple={false}
+                    onDone={({base64}) => setFormData({...formData, image : base64})}
+                ></FileBase>
+              </div>
+            </p><hr />
+              <p className = "py-2 text-danger" data-bs-dismiss="modal">Remove current photo</p><hr />
+              <p className = "py-2" data-bs-dismiss="modal">Close</p><hr />
+          </div>
+        </div>
+      </div>
       <div className="row">
         <div className="col-md-6 offset-md-3 ">
           <div className="card my-5">
             <div className="card-body">
               <form className="px-4 py-5">
+              <div class="form-group row mb-4">
+                  <label for="inputEmail3" class="col-sm-2 col-form-label">
+                  <img style = {{borderRadius : "50%", objectFit : "cover"}} src={image} width = "60rem" height = "60rem" alt="" />
+                  </label>
+                  <div class="col-sm-10">
+                    <p className = "fs-5">{username}</p>
+                    <h6 id="emailHelp" class="form-text text-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style = {{cursor : "pointer"}}>
+                     Change Profile Photo
+                    </h6>
+                  </div>
+                </div>
                 <div class="form-group row mb-4">
                   <label for="inputEmail3" class="col-sm-2 col-form-label">
                     <strong>Name</strong>

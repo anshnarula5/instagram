@@ -1,14 +1,15 @@
 import axios from "axios";
 import { COMMENT, CREATE_POST, DELETE_COMMENT, DELETE_POST, GET_POSTS, LIKE_COMMENT, LIKE_POST, POST_ERROR } from "../type";
 import { setAlert } from "./alerts";
-import {getProfileById} from "./profile";
+import {getProfile, getProfileById} from "./profile";
 
 const url = "http://localhost:5000/api/posts";
 
 export const getPosts = () => async (dispatch) => {
   try {
     const res = await axios.get(`${url}`);
-    dispatch({ type: GET_POSTS, payload: res.data });
+    dispatch({type: GET_POSTS, payload: res.data});
+    dispatch(getProfile())
   } catch (error) {
     // dispatch({ type: POST_ERROR, payload : {msg : error.response.statusText, status : error.response.status} });
     console.log(error)
