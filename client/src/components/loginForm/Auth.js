@@ -52,19 +52,19 @@ const Auth = () => {
           <div className="card p-5">
             <form>
               <div className="mb-5">
-                <a title="Instagram / Mackey Saturday, Public domain, via Wikimedia Commons">
+                <span title="Instagram / Mackey Saturday, Public domain, via Wikimedia Commons">
                   <img
                     style={{ width: "19rem" }}
                     alt="Instagram logo"
                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/256px-Instagram_logo.svg.png"
                   />
-                </a>
+                </span>
               </div>
-              <div class=" my-2">
+              <div className=" my-2">
                 <input
                   type="email"
                   name="email"
-                  class="form-control bg-light"
+                  className="form-control bg-light"
                   placeholder="Email"
                   value={email}
                   onChange={handleChange}
@@ -74,22 +74,22 @@ const Auth = () => {
               {!isLogin && (
                 <>
                   {" "}
-                  <div class=" my-2">
+                  <div className=" my-2">
                     <input
                       type="text"
                       name="username"
-                      class="form-control bg-light"
+                      className="form-control bg-light"
                       required
                       placeholder="Username"
                       value={username}
                       onChange={handleChange}
                     />
                   </div>
-                  <div class=" my-2">
+                  <div className=" my-2">
                     <input
                       type="text"
                       name="fullname"
-                      class="form-control bg-light"
+                      className="form-control bg-light"
                       placeholder="Fullname"
                       required
                       value={fullname}
@@ -99,11 +99,11 @@ const Auth = () => {
                 </>
               )}
 
-              <div class=" my-1">
+              <div className=" my-1">
                 <input
                   type="password"
                   name="password"
-                  class="form-control bg-light"
+                  className="form-control bg-light"
                   placeholder="Password"
                   required
                   value={password}
@@ -112,7 +112,7 @@ const Auth = () => {
               </div>
             </form>
             <button
-              class="btn btn-primary mt-3 btn-block"
+              className="btn btn-primary mt-3 btn-block"
               onClick={handleSubmit}
             >
               {isLogin ? "Sign in" : "Register"}

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { follow } from "../../redux/actions/profile";
@@ -49,12 +49,12 @@ const ProfileDetail = ({ profile }) => {
                 className="btn btn-outline-dark btn-sm px-3"
                 onClick={handleFollow}
               >
-                <i class="fas fa-user-check"></i>
+                <i className="fas fa-user-check"></i>
               </button>
                   </>
             )}
             <p className="d-inline fs-5 mx-3">
-              <i class="fas fa-cog"></i>
+              <i className="fas fa-cog"></i>
             </p>
           </div>
           <div className="my-3">

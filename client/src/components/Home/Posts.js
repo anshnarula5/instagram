@@ -15,8 +15,8 @@ const Posts = () => {
   let { posts, loading } = useSelector((state) => state.post);
   const { profile, profileLoading } = useSelector((state) => state.profile);
 
-  if (loading ) return "..loading";
-  if (profileLoading ) return "..loading";
+  if (loading ) return <div className = "pt-5"><div className="loader py-5"></div></div>;
+  if (profileLoading ) return <div className = "pt-5"><div className="loader py-5"></div></div>;
 
   let filteredPosts = [];
 

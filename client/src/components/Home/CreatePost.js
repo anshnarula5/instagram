@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {Redirect} from "react-router";
-import {createPost, getPosts} from "../../redux/actions/post";
+import {createPost} from "../../redux/actions/post";
 import FileBase from "react-file-base64"
 
 const CreatePost = () => {
@@ -26,27 +26,27 @@ const CreatePost = () => {
   }
   return (
     <div className="row ">
-      <div class="card mt-5 w-75 offset-md-1">
+      <div className="card mt-5 w-75 offset-md-1">
         <div className="text-center mt-3">Create a post</div>
         <hr />
-        <div class="row no-gutters ">
-          <div class="col-md-8">
-            <form class="md-form">
-              <div class="file-field">
-                <div class="z-depth-1-half mb-4">
+        <div className="row no-gutters ">
+          <div className="col-md-8">
+            <form className="md-form">
+              <div className="file-field">
+                <div className="z-depth-1-half mb-4">
                   {image ? (
-                    <img src={image} class="img-fluid virtual" alt="example " />
+                    <img src={image} className="img-fluid virtual" alt="example " />
                   ) : (
                     
                     <img
                       src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg"
-                      class="img-fluid virtual"
+                      className="img-fluid virtual"
                       alt="example placeholder"
                     />
                   )}
                 </div>
-                <div class="d-flex justify-content-center">
-                  <div class="btn btn-mdb-color btn-rounded float-left">
+                <div className="d-flex justify-content-center">
+                  <div className="btn btn-mdb-color btn-rounded float-left">
                     <FileBase
                       type="file"
                       multiple={false}
@@ -57,11 +57,11 @@ const CreatePost = () => {
               </div>
             </form>
           </div>
-          <div class="col-md-4 ">
+          <div className="col-md-4 ">
             {loading ? (
               "...loading"
             ) : (
-              <h5 class="card-title">
+              <h5 className="card-title">
                 <img
                   src={user.profileImage}
                   alt=""
@@ -71,9 +71,9 @@ const CreatePost = () => {
                 {user.username}
               </h5>
             )}
-            <ul class="list-group list-group-flush">
+            <ul className="list-group list-group-flush">
               <textarea
-                class="list-group-item"
+                className="list-group-item"
                 rows="8"
                 name="text"
                 placeholder="Write a caption"
@@ -81,7 +81,7 @@ const CreatePost = () => {
                 value={text}
               ></textarea>
               <input
-                class="list-group-item "
+                className="list-group-item "
                 placeholder="Add location"
                 onChange={handleChange}
                 name="location"

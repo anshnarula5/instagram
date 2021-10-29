@@ -9,7 +9,7 @@ const Profiles = () => {
     dispatch(getAllProfiles());
   }, [dispatch]);
    const { user } = useSelector((state) => state.auth);
-  if (loading) return "...Loading";
+  if (loading) return <div className = "pt-5"><div className="loader py-5"></div></div>;
  
   profiles = profiles.filter((p) => p?._id !== profile?._id)
   return (
@@ -42,15 +42,15 @@ const Profiles = () => {
                   ) ? (
                     <>
                       <div
-                        class="modal fade"
+                        className="modal fade"
                         id="exampleModal"
                         tabindex="-1"
                         aria-labelledby="exampleModalLabel"
                         aria-hidden="true"
                       >
-                        <div class="modal-dialog modal-sm modal-dialog-centered">
-                          <div class="modal-content ">
-                            <div class=" d-flex flex-column mt-3 align-items-center justify-content-center">
+                        <div className="modal-dialog modal-sm modal-dialog-centered">
+                          <div className="modal-content ">
+                            <div className=" d-flex flex-column mt-3 align-items-center justify-content-center">
                               <img
                                 style={{ borderRadius: "50%", objectFit : "cover" }}
                                 width="80rem"
@@ -63,14 +63,14 @@ const Profiles = () => {
                               </p>
                             </div>
                             <hr />
-                            <div class="text-center text-danger my-2">
+                            <div className="text-center text-danger my-2">
                               <p style = {{cursor : "pointer"}}  data-bs-dismiss="modal"  onClick={() => {
                                 dispatch(follow(profile._id));
                                 
                                 }} >Unfollow</p>
                             </div>{" "}
                             <hr />
-                            <div class="text-center my-2">
+                            <div className="text-center my-2">
                               <p style = {{cursor : "pointer"}} data-bs-dismiss="modal">Close</p>
                             </div>{" "}
                             <hr />

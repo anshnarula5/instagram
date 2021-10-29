@@ -9,9 +9,9 @@ const Navbar = () => {
 
   return (
     <>
-      <nav class="navbar navbar-expand-lg navbar-light bg-white static-top border-bottom">
-        <div class="container w-50">
-          <Link class="navbar-brand " to="/">
+      <nav className="navbar navbar-expand-lg navbar-light bg-white static-top border-bottom">
+        <div className="container w-50">
+          <Link className="navbar-brand " to="/">
             <img
               src={logo}
               alt="..."
@@ -19,7 +19,7 @@ const Navbar = () => {
             />
           </Link>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
@@ -27,67 +27,65 @@ const Navbar = () => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item fs-4 mx-1">
-                <Link class="nav-link active" aria-current="page" to="/">
-                <i class="fas fa-home"></i>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav ms-auto">
+              <li className="nav-item fs-4 mx-1">
+                <Link className="nav-link active" aria-current="page" to="/">
+                <i className="fas fa-home"></i>
                 </Link>
               </li>
-              <li class="nav-item fs-4 mx-1">
-                <Link class="nav-link active" aria-current="page" to="/auth">
-                <i class="far fa-comment-dots"></i>
+              <li className="nav-item fs-4 mx-1">
+                <Link className="nav-link active" aria-current="page" to="/auth">
+                <i className="far fa-comment-dots"></i>
                 </Link>
               </li>
-              <li class="nav-item fs-4 mx-1">
-                <Link class="nav-link active" aria-current="page" to="/create">
-                <i class="far fa-plus-square"></i>
+              <li className="nav-item fs-4 mx-1">
+                <Link className="nav-link active" aria-current="page" to="/create">
+                <i className="far fa-plus-square"></i>
                 </Link>
               </li>
-              <li class="nav-item fs-4 mx-1">
-                <Link class="nav-link active" aria-current="page" to="/explore">
-                <i class="far fa-compass"></i>
+              <li className="nav-item fs-4 mx-1">
+                <Link className="nav-link active" aria-current="page" to="/explore">
+                <i className="far fa-compass"></i>
                 </Link>
               </li>
-              <li class="nav-item fs-4 mx-1">
-                <Link class="nav-link active" aria-current="page" to="/">
-                <i class="far fa-heart"></i>
+              <li className="nav-item fs-4 mx-1">
+                <Link className="nav-link active" aria-current="page" to="/">
+                <i className="far fa-heart"></i>
                 </Link>
               </li>
               
                  
-              <li class="nav-item dropdown fs-4 mx-1" >
+              <li className="nav-item dropdown fs-4 mx-1" >
                 <a
-                  class="nav-link dropdown-toggle"
+                  className="nav-link dropdown-toggle"
                   href="#"
                   id="navbarDropdown"
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  <i class="far fa-user"></i>
+                  <i className="far fa-user"></i>
                 </a>
                 <ul
-                  class="dropdown-menu dropdown-menu-end"
+                  className="dropdown-menu dropdown-menu-end"
                   aria-labelledby="navbarDropdown"
                 >
                   <li>
-                    <Link class="dropdown-item" to="/profile/me">
+                    <Link className="dropdown-item" to="/profile/me">
                       profile
                     </Link>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
-                      Another action
-                    </a>
+                    
                   </li>
                   <li>
-                    <hr class="dropdown-divider" />
+                    <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <p class="dropdown-item" onClick = {() => dispatch(logout())} style = {{cursor : "pointer"}}>
+                    <p className="dropdown-item" onClick = {() => dispatch(logout())} style = {{cursor : "pointer"}}>
                       Logout
                     </p>
                   </li>

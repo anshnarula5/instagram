@@ -7,10 +7,9 @@ const Right = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllProfiles());
-    dispatch(getProfile())
   }, [dispatch]);
   const { user } = useSelector((state) => state.auth);
-  if (loading) return "...Loading";
+  if (loading) return <div className = "pt-5"><div className="loader py-5"></div></div>;
   profiles = profiles.filter((p) => p?._id !== profile?._id);
 
   if (profile?.following && profile?.following.length > 0) {
@@ -24,7 +23,7 @@ const Right = () => {
   }
 
   return (
-    <>{loading && "...Loading"}
+    <>{loading && <div className = "pt-5"><div className="loader py-5"></div></div>}
       {!loading && <>
       <section className="d-flex align-items-center justify-content-between" >
         <img

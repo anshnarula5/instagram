@@ -30,24 +30,24 @@ const PostElement = ({ post, profile, explore }) => {
   return (
     <>
       <div
-        class="modal fade"
+        className="modal fade"
         id={`body${post._id}`}
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-          <div class="modal-content">
+        <div className="modal-dialog modal-dialog-centered modal-lg">
+          <div className="modal-content">
             <div
-              class="modal-body"
+              className="modal-body"
               style={{ padding: "0%", margin: "0%", borderRadius: "0%" }}
             >
               <div className="card">
-                <div class="row no-gutters">
-                  <div class="col-md-8">
+                <div className="row no-gutters">
+                  <div className="col-md-8">
                     <img
                       src={post.image}
-                      class="card-img"
+                      className="card-img"
                       alt="..."
                       style={{
                         height: "35rem",
@@ -58,7 +58,7 @@ const PostElement = ({ post, profile, explore }) => {
                       }}
                     />
                   </div>
-                  <div class="col-md-4 d-flex flex-column justify-content-between">
+                  <div className="col-md-4 d-flex flex-column justify-content-between">
                     <div className="">
                       <section className="py-3 border-bottom d-flex justify-content-between">
                         <section>
@@ -115,7 +115,7 @@ const PostElement = ({ post, profile, explore }) => {
                           </div>
                         )}
                         {post.comments.map((comment) => (
-                          <div className="py-3 d-flex justify-content-between">
+                          <div className="py-3 d-flex justify-content-between" key={comment._id}>
                             <section>
                               <img
                                 src={comment.profileImage}
@@ -168,12 +168,12 @@ const PostElement = ({ post, profile, explore }) => {
                                 (like) => like._id === user._id
                               ) ? (
                                 <i
-                                  class="far fa-heart"
+                                  className="far fa-heart"
                                   style={{ cursor: "pointer" }}
                                 ></i>
                               ) : (
                                 <i
-                                  class="fas fa-heart"
+                                  className="fas fa-heart"
                                   style={{
                                     color: "#fb3958",
                                     cursor: "pointer",
@@ -188,34 +188,34 @@ const PostElement = ({ post, profile, explore }) => {
                     <div className="border-top pt-1">
                       <section>
                         <div className="d-flex justify-content-between">
-                          <p class="card-text fs-5 pb-1">
+                          <p className="card-text fs-5 pb-1">
                             {!post.likes.find(
                               (like) => like.user === user._id
                             ) ? (
                               <i
-                                class="far fa-heart"
+                                className="far fa-heart"
                                 onClick={handleLike}
                                 style={{ cursor: "pointer" }}
                               ></i>
                             ) : (
                               <i
-                                class="fas fa-heart"
+                                className="fas fa-heart"
                                 onClick={handleLike}
                                 style={{ cursor: "pointer", color: "#fb3958" }}
                               ></i>
                             )}
                             <i
-                              class="far fa-comment mx-3"
+                              className="far fa-comment mx-3"
                               style={{ cursor: "pointer" }}
                             ></i>
                             <i
-                              class="far fa-paper-plane"
+                              className="far fa-paper-plane"
                               style={{ cursor: "pointer" }}
                             ></i>
                           </p>
-                          <p class="card-text fs-5 px-2">
+                          <p className="card-text fs-5 px-2">
                             <i
-                              class="far fa-bookmark"
+                              className="far fa-bookmark"
                               style={{ cursor: "pointer" }}
                             ></i>
                           </p>
@@ -229,10 +229,10 @@ const PostElement = ({ post, profile, explore }) => {
                           </small>
                         </small>
                       </section>
-                      <section class="border-top py-1">
-                        <ul class="list-group list-group-flush d-flex flex-row align-items-center justify-content-between">
+                      <section className="border-top py-1">
+                        <ul className="list-group list-group-flush d-flex flex-row align-items-center justify-content-between">
                           <input
-                            class="list-group-item w-100"
+                            className="list-group-item w-100"
                             placeholder="Add comment"
                             name="comment"
                             value={text}
@@ -266,11 +266,11 @@ const PostElement = ({ post, profile, explore }) => {
         <div className="over ">
           <div className="buttons fs-6 text-white ">
             <div className=" d-inline">
-              <i class="fas fa-heart mx-1"></i>
+              <i className="fas fa-heart mx-1"></i>
               {post.likes.length}
             </div>
             <div className="px-3 d-inline">
-              <i class="fas fa-comment mx-1"></i>
+              <i className="fas fa-comment mx-1"></i>
               {post.comments.length}
             </div>
           </div>

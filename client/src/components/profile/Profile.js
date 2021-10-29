@@ -9,7 +9,7 @@ const Profile = () => {
   const {profile, loading} = useSelector((state) => state.profile);
   useEffect(() => {
     dispatch(getProfile())
-  }, [])
+  }, [dispatch])
 
   return (
     <>

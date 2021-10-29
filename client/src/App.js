@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
-
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import PrivateRoute from "./components/routing/PrivateRoute";
+
 
 import "./App.css";
 import Alert from "./components/layout/Alert";

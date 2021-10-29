@@ -44,7 +44,7 @@ export const editImage = (formData) => async (dispatch) => {
               "Content-Type": "application/json",
             },
           };
-        const res = await axios.patch(`${url}/api/auth/editImage`, formData, config)
+        await axios.patch(`${url}/api/auth/editImage`, formData, config)
         dispatch(setAlert("Updated Image", "success"))
     } catch (error) {
         dispatch({type : PROFILE_ERROR})

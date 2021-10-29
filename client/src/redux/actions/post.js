@@ -49,7 +49,7 @@ export const likePost = (id, userId) => async (dispatch) => {
 
 export const deletePost = (id) => async (dispatch) => {
   try {
-    const res = await axios.delete(`${url}/${id}`)
+    await axios.delete(`${url}/${id}`)
     dispatch({type : DELETE_POST, payload : id})
     dispatch(setAlert("Deleted post", "success"))
   } catch (error) {
@@ -97,7 +97,7 @@ export const likeComment = (id, commentId, userId) => async (dispatch) => {
 
 export const deleteComment = (id, commentId, userId) => async (dispatch) => {
   try {
-    const res = await axios.delete(`${url}/${id}/comment/${commentId}/`)
+    await axios.delete(`${url}/${id}/comment/${commentId}/`)
     dispatch({type: DELETE_COMMENT, payload: {id, commentId}})
     if (userId) {
       dispatch(getProfileById(userId))

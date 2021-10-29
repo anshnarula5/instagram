@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import moment from "moment";
 
-import { comment, deletePost, getPosts, likeComment, likePost, deleteComment, getPostById } from "../../../redux/actions/post";
+import { comment, deletePost, likeComment, likePost, deleteComment } from "../../../redux/actions/post";
 import { Link } from "react-router-dom";
 
 const Post = ({post}) => {
@@ -26,9 +26,9 @@ const Post = ({post}) => {
   };
   return (
     <>
-      <div class="card w-75 offset-2  my-2  ">
+      <div className="card w-75 offset-2  my-2  ">
         <div
-          class="modal fade "
+          className="modal fade "
           id={`header${post._id}`}
           data-bs-backdrop="static"
           data-bs-keyboard="false"
@@ -37,10 +37,10 @@ const Post = ({post}) => {
           aria-hidden="true"
         >
           <div
-            class="modal-dialog modal-dialog-centered"
+            className="modal-dialog modal-dialog-centered"
             style={{ cursor: "pointer" }}
           >
-            <div class="modal-content text-center w-75">
+            <div className="modal-content text-center w-75">
               {post.user._id === user._id ? (
                 <>
                   <div
@@ -70,36 +70,36 @@ const Post = ({post}) => {
         </div>
        
         <div
-          class="modal fade"
+          className="modal fade"
           id={`body${post._id}`}
           tabindex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
-          <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
+          <div className="modal-dialog modal-dialog-centered modal-lg">
+            <div className="modal-content">
               <div
-                class="modal-body"
+                className="modal-body"
                 style={{ padding: "0%", margin: "0%", borderRadius: "0%" }}
               >
                 <div className="card">
-                  <div class="row no-gutters">
-                    <div class="col-md-8"  >
+                  <div className="row no-gutters">
+                    <div className="col-md-8"  >
                       <img
                         src={post.image}
-                        class="card-img"
+                        className="card-img"
                         alt="..."
                         style={{ height: "35rem", overflow: "hidden", display: "block", objectFit : "cover" , borderRadius: "0%"  }}
                       />
                     </div>
-                    <div class="col-md-4 d-flex flex-column justify-content-between"  >
+                    <div className="col-md-4 d-flex flex-column justify-content-between"  >
                       <div className="">
                         <section className = "py-3 border-bottom d-flex justify-content-between">
                           <section>
                           <img style = {{borderRadius : "50%", objectFit : "cover"}} src={post.user.profileImage} width = "30rem" height = "30rem" alt="" />
                           <h6 className = "mx-3 d-inline">{post.user.username}</h6>
                           </section>
-                          <p className = "fs-5 px-2"><i class="fas fa-ellipsis-h"></i></p>
+                          <p className = "fs-5 px-2"><i className="fas fa-ellipsis-h"></i></p>
                         </section>
                         <div className="commentsection">
                           {post.text && <div className="py-2">
@@ -107,7 +107,7 @@ const Post = ({post}) => {
                             <strong className="mx-3">{post.user.username}</strong> {post.text}
                           </div>}
                           {post.comments.map(comment =>
-                            <div className="py-3 d-flex justify-content-between">
+                            <div className="py-3 d-flex justify-content-between" key={comment._id}>
                               <section>
                               <img src={comment.profileImage} style = {{borderRadius : "50%" , objectFit : "cover"}} height = "30rem"  width = "30rem" alt="" />
                                   <b className="mx-2">{comment.username}</b>
@@ -118,28 +118,28 @@ const Post = ({post}) => {
                                 {user.username === comment.username && <small style = {{ cursor: "pointer"}}><small  onClick = {() => dispatch(deleteComment( post._id ,comment._id))}>Delete</small></small> }
                                 </section>
                               </section>
-                              <section className="px-2" onClick={() => dispatch(likeComment(post._id, comment._id))} >{!comment.likes.find(like => like._id === user._id) ? <i class="far fa-heart"  style={{ cursor: "pointer" }} ></i>: <i class="fas fa-heart"style = {{color : "#fb3958",  cursor: "pointer"}}></i>}</section>
+                              <section className="px-2" onClick={() => dispatch(likeComment(post._id, comment._id))} >{!comment.likes.find(like => like._id === user._id) ? <i className="far fa-heart"  style={{ cursor: "pointer" }} ></i>: <i className="fas fa-heart"style = {{color : "#fb3958",  cursor: "pointer"}}></i>}</section>
                             </div>)}
                       </div>
                       </div>
                       <div className="border-top pt-1">
                       <section>
                       <div className="d-flex justify-content-between">
-                        <p class="card-text fs-5 pb-1">
+                        <p className="card-text fs-5 pb-1">
                           {!post.likes.find(like => like.user === user._id) ? <i
-                            class="far fa-heart"
+                            className="far fa-heart"
                             onClick={handleLike}
                             style={{ cursor: "pointer" }}
                           ></i> : <i
-                          class="fas fa-heart"
+                          className="fas fa-heart"
                           onClick={handleLike}
                           style={{ cursor: "pointer", color: "#fb3958" }}
                         ></i>}
-                          <i class="far fa-comment mx-3" style={{ cursor: "pointer" }}></i>
-                          <i class="far fa-paper-plane" style={{ cursor: "pointer" }}></i>
+                          <i className="far fa-comment mx-3" style={{ cursor: "pointer" }}></i>
+                          <i className="far fa-paper-plane" style={{ cursor: "pointer" }}></i>
                         </p>
-                        <p class="card-text fs-5 px-2">
-                          <i class="far fa-bookmark" style={{ cursor: "pointer" }}></i>
+                        <p className="card-text fs-5 px-2">
+                          <i className="far fa-bookmark" style={{ cursor: "pointer" }}></i>
                         </p>
                       </div>
                       <small className="py-1">
@@ -151,10 +151,10 @@ const Post = ({post}) => {
                             </small>
                           </small>
                       </section>
-                      <section class="border-top py-1">
-                        <ul class="list-group list-group-flush d-flex flex-row align-items-center justify-content-between">
+                      <section className="border-top py-1">
+                        <ul className="list-group list-group-flush d-flex flex-row align-items-center justify-content-between">
                           <input
-                            class="list-group-item w-100"
+                            className="list-group-item w-100"
                             placeholder="Add comment"
                             name="comment"
                             value={text}
@@ -178,7 +178,7 @@ const Post = ({post}) => {
             </div>
           </div>
         </div>
-        <section class="card-title mt-2 d-flex align-items-center justify-content-between ">
+        <section className="card-title mt-2 d-flex align-items-center justify-content-between ">
           <div className=" d-flex align-items-center">
             <Link
               to={
@@ -200,9 +200,7 @@ const Post = ({post}) => {
             <div className="d-flex flex-column">
               <Link
                 to={
-                  post.user._id === user._id
-                    ? "/profile/me"
-                    : `/profile/${post.user._id}`
+                  `/profile/${post.user._id}`
                 }
                 style={{ textDecoration: "none", color: "black" }}
               >
@@ -212,35 +210,35 @@ const Post = ({post}) => {
             </div>
           </div>
           <i
-            class="fas fa-ellipsis-h mx-3"
+            className="fas fa-ellipsis-h mx-3"
             style={{ cursor: "pointer" }}
             data-bs-toggle="modal"
             data-bs-target={`#header${post._id}`}
           ></i>
         </section>
         <img
-          class="card-img-top postImage"
+          className="card-img-top postImage"
+          alt = "post"
           src={post.image}
-          alt="Card image cap"
           style={{ maxHeight: "30rem", overflow: "hidden", display: "block", objectFit : "contain" }}
         />
-        <div class="card-body">
+        <div className="card-body">
           <div className="d-flex justify-content-between">
-            <p class="card-text fs-5">
+            <p className="card-text fs-5">
                 {!post.likes.find(like => like.user === user._id) ? <i
-                  class="far fa-heart"
+                  className="far fa-heart"
                   onClick={handleLike}
                   style={{ cursor: "pointer" }}
                 ></i> : <i
-                class="fas fa-heart like"
+                className="fas fa-heart like"
                 onClick={handleLike}
                 style={{ cursor: "pointer", color: "#fb3958" }}
               ></i>}          
-              <i class="far fa-comment mx-3" style={{ cursor: "pointer" }}></i>
-              <i class="far fa-paper-plane" style={{ cursor: "pointer" }}></i>
+              <i className="far fa-comment mx-3" style={{ cursor: "pointer" }}></i>
+              <i className="far fa-paper-plane" style={{ cursor: "pointer" }}></i>
             </p>
-            <p class="card-text fs-5">
-              <i class="far fa-bookmark" style={{ cursor: "pointer" }}></i>
+            <p className="card-text fs-5">
+              <i className="far fa-bookmark" style={{ cursor: "pointer" }}></i>
             </p>
           </div>
           <p className="mt-1">
@@ -281,10 +279,10 @@ const Post = ({post}) => {
             </small>
           </small>
         </div>
-        <section class="border-top">
-          <ul class="list-group list-group-flush d-flex flex-row align-items-center justify-content-between">
+        <section className="border-top">
+          <ul className="list-group list-group-flush d-flex flex-row align-items-center justify-content-between">
             <input
-              class="list-group-item w-100"
+              className="list-group-item w-100"
               placeholder="Add comment"
               name="comment"
               value={text}

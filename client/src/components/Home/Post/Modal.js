@@ -20,18 +20,18 @@
 //     setText("");
 //   };
 //   return (
-//     <div class="modal-dialog modal-dialog-centered modal-lg">
-//       <div class="modal-content">
+//     <div className="modal-dialog modal-dialog-centered modal-lg">
+//       <div className="modal-content">
 //         <div
-//           class="modal-body"
+//           className="modal-body"
 //           style={{ padding: "0%", margin: "0%", borderRadius: "0%" }}
 //         >
 //           <div className="card">
-//             <div class="row no-gutters">
-//               <div class="col-md-8">
+//             <div className="row no-gutters">
+//               <div className="col-md-8">
 //                 <img
 //                   src={post.image}
-//                   class="card-img"
+//                   className="card-img"
 //                   alt="..."
 //                   style={{
 //                     height: "35rem",
@@ -42,7 +42,7 @@
 //                   }}
 //                 />
 //               </div>
-//               <div class="col-md-4 d-flex flex-column justify-content-between">
+//               <div className="col-md-4 d-flex flex-column justify-content-between">
 //                 <div className="">
 //                   <section className="py-3 border-bottom d-flex justify-content-between">
 //                     <section>
@@ -114,12 +114,12 @@
 //                             (like) => like._id === user._id
 //                           ) ? (
 //                             <i
-//                               class="far fa-heart"
+//                               className="far fa-heart"
 //                               style={{ cursor: "pointer" }}
 //                             ></i>
 //                           ) : (
 //                             <i
-//                               class="fas fa-heart"
+//                               className="fas fa-heart"
 //                               style={{ color: "#fb3958", cursor: "pointer" }}
 //                             ></i>
 //                           )}
@@ -131,32 +131,32 @@
 //                 <div className="border-top pt-1">
 //                   <section>
 //                     <div className="d-flex justify-content-between">
-//                       <p class="card-text fs-5 pb-1">
+//                       <p className="card-text fs-5 pb-1">
 //                         {!post.likes.find((like) => like.user === user._id) ? (
 //                           <i
-//                             class="far fa-heart"
+//                             className="far fa-heart"
 //                             onClick={handleLike}
 //                             style={{ cursor: "pointer" }}
 //                           ></i>
 //                         ) : (
 //                           <i
-//                             class="fas fa-heart"
+//                             className="fas fa-heart"
 //                             onClick={handleLike}
 //                             style={{ cursor: "pointer", color: "#fb3958" }}
 //                           ></i>
 //                         )}
 //                         <i
-//                           class="far fa-comment mx-3"
+//                           className="far fa-comment mx-3"
 //                           style={{ cursor: "pointer" }}
 //                         ></i>
 //                         <i
-//                           class="far fa-paper-plane"
+//                           className="far fa-paper-plane"
 //                           style={{ cursor: "pointer" }}
 //                         ></i>
 //                       </p>
-//                       <p class="card-text fs-5 px-2">
+//                       <p className="card-text fs-5 px-2">
 //                         <i
-//                           class="far fa-bookmark"
+//                           className="far fa-bookmark"
 //                           style={{ cursor: "pointer" }}
 //                         ></i>
 //                       </p>
@@ -170,10 +170,10 @@
 //                       </small>
 //                     </small>
 //                   </section>
-//                   <section class="border-top py-1">
-//                     <ul class="list-group list-group-flush d-flex flex-row align-items-center justify-content-between">
+//                   <section className="border-top py-1">
+//                     <ul className="list-group list-group-flush d-flex flex-row align-items-center justify-content-between">
 //                       <input
-//                         class="list-group-item w-100"
+//                         className="list-group-item w-100"
 //                         placeholder="Add comment"
 //                         name="comment"
 //                         value={text}

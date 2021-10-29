@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProfile, getProfileById } from "../../redux/actions/profile";
+import { getProfileById } from "../../redux/actions/profile";
 import ProfileDetail from "./ProfileDetail";
 import ProfilePost from "./ProfilePost";
 
@@ -9,7 +9,7 @@ const ProfileById = ({match}) => {
   const {profile, loading} = useSelector((state) => state.profile);
   useEffect(() => {
     dispatch(getProfileById(match.params.id))
-  }, [])
+  }, [dispatch, match.params.id])
 
   return (
     <>

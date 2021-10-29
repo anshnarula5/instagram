@@ -10,8 +10,8 @@ const Explore = () => {
     }, [dispatch])
     const {posts, loading} = useSelector(state => state.post)
     const {profile, pLoading} = useSelector(state => state.profile)
-    if(loading) return "...Loading"
-    if(pLoading) return "...Loading"
+    if(loading) return <div className = "pt-5"><div className="loader py-5"></div></div>
+    if(pLoading) return <div className = "pt-5"><div className="loader py-5"></div></div>
     return (
         <>
             <div className="w-75">
