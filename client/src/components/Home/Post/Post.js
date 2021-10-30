@@ -56,11 +56,12 @@ const Post = ({post}) => {
                 </>
               ) : (
                 <>
-                  <div className="my-2 text-danger">Unfollow</div>
+                   <Link to={`/profile/${post.user._id}`} > <div className="my-2"  data-bs-dismiss="modal">Open Profile</div></Link>
                   <hr />
                 </>
               )}
-              <div className="my-2">Open post</div>
+              <div className="my-2" data-bs-dismiss="modal" data-bs-toggle="modal"
+                data-bs-target={`#body${post._id}`}>Open post</div>
               <hr />
               <div className="my-2" data-bs-dismiss="modal">
                 Close
@@ -87,7 +88,7 @@ const Post = ({post}) => {
                     <div className="col-md-8"  >
                       <img
                         src={post.image}
-                        className="card-img"
+                        className="card-img img-fluid"
                         alt="..."
                         style={{ height: "35rem", overflow: "hidden", display: "block", objectFit : "cover" , borderRadius: "0%"  }}
                       />
