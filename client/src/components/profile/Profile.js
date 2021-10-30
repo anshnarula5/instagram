@@ -8,13 +8,15 @@ const Profile = () => {
   const dispatch = useDispatch()
   const {profile, loading} = useSelector((state) => state.profile);
   useEffect(() => {
-    dispatch(getProfile())
+    if (!profile) {
+      dispatch(getProfile())
+    }
   }, [dispatch])
 
   return (
     <>
       {loading ? (
-        "...loading"
+        <div className = "pt-5"><div className="loader py-5"></div></div>
       ) : (
         <div className="w-75 offset-md-2 d-flex flex-column">
             <ProfileDetail profile={profile}/>

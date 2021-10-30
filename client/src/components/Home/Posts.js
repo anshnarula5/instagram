@@ -30,7 +30,7 @@ const Posts = () => {
   }
 
 
-  if (filteredPosts && filteredPosts.length > 0) {
+  if (filteredPosts && filteredPosts.length > 0 && !loading && !profileLoading) {
     return filteredPosts.map((post) => <Post key={post._id} post={post} />);
   }
   return  <Profiles />;

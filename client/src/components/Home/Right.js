@@ -7,7 +7,7 @@ const Right = () => {
   let { profile, profiles, loading } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllProfiles());
+    if(!profiles){dispatch(getAllProfiles());}
   }, [dispatch]);
   const { user } = useSelector((state) => state.auth);
   if (loading) return <div className = "pt-5"><div className="loader py-5"></div></div>;
