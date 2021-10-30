@@ -27,6 +27,7 @@ const PostElement = ({ post, profile, explore, myProfile }) => {
     }
     setText("");
   };
+  if(!post) return "...loading"
   return (
     <>
       <div
@@ -140,7 +141,7 @@ const PostElement = ({ post, profile, explore, myProfile }) => {
                         <p>actions</p>
                       </section>
                       <div className="commentsection">
-                        {/* {post.text && (
+                        {post.text && (
                           <div className="py-2">
                             <img
                               style={{
@@ -155,8 +156,9 @@ const PostElement = ({ post, profile, explore, myProfile }) => {
                             <h6 className="mx-3">{post.user.username}</h6>{" "}
                             {post.text}
                           </div>
-                        )} */}
-                        {post.comments.map((comment) => (
+                        )}
+                        {!post.comments || post.comments.length === 0 && <small className = "text-muted">No comments</small>}
+                        {post.comments && post.comments.length > 0 && post.comments.map((comment) => (
                           <div
                             className="py-3 d-flex justify-content-between align-items-center"
                             key={comment._id}
@@ -241,7 +243,7 @@ const PostElement = ({ post, profile, explore, myProfile }) => {
                       <section>
                         <div className="d-flex justify-content-between">
                           <p className="card-text fs-5 pb-1">
-                            {!post.likes.find(
+                            {post.likes && post.likes.length > 0 && !post.likes.find(
                               (like) => like.user === user._id
                             ) ? (
                               <i
@@ -273,7 +275,7 @@ const PostElement = ({ post, profile, explore, myProfile }) => {
                           </p>
                         </div>
                         <small className="py-1">
-                          <b>{post.likes.length}</b> likes
+                          <b>{post.likes && post.likes.length > 0 ? post?.likes?.length : 0}</b> likes
                         </small>
                         <small>
                           <small className="text-muted d-block mb-2">

@@ -52,7 +52,7 @@ const Profiles = () => {
                     <>
                       <div
                         className="modal fade"
-                        id="exampleModal"
+                        id={`modal${profile.user._id}`}
                         tabindex="-1"
                         aria-labelledby="exampleModalLabel"
                         aria-hidden="true"
@@ -89,7 +89,7 @@ const Profiles = () => {
                       <button
                         className="btn btn-outline-dark"
                         data-bs-toggle="modal"
-                        data-bs-target="#exampleModal"
+                        data-bs-target={`#modal${profile.user._id}`}
                        
                       >
                         following

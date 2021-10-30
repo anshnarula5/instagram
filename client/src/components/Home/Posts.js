@@ -9,7 +9,6 @@ import Profiles from "./Profiles"
 const Posts = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getProfile())
     dispatch(getPosts());
   }, [dispatch]);
   let { posts, loading } = useSelector((state) => state.post);

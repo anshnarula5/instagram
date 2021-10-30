@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { follow, getAllProfiles, getProfile } from "../../redux/actions/profile";
-
+import { Link } from "react-router-dom";
 const Right = () => {
   let { profile, profiles, loading } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ const Right = () => {
           src={profile?.user.profileImage}
           alt=""
         />
-        <h6 className=" d-inline mx-2 flex-grow-1">{profile?.user.username}</h6>
+        <h6 className=" d-inline mx-2 flex-grow-1"><Link to = {`/profile/${profile.user._id}`}>{profile?.user.username}</Link></h6>
         <p>Logout</p>
       </section>
       <section className="mt-4">

@@ -21,7 +21,7 @@ const Home = () => {
           </div>
           <div className="col-md-4 mt-4 " style = {{zIndex : "0"}}>
             <div className="sticky-top" style={{ top: "2rem" }}>
-              <Right />
+              <Right profile={profile}/>
             </div>
           </div>
         </div>
