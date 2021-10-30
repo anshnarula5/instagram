@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { follow, getAllProfiles, getProfile } from "../../redux/actions/profile";
 import { Link } from "react-router-dom";
+import {logout} from "../../redux/actions/auth";
 const Right = () => {
   let { profile, profiles, loading } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
@@ -34,7 +35,7 @@ const Right = () => {
           alt=""
         />
         <h6 className=" d-inline mx-2 flex-grow-1"><Link to = {`/profile/${profile.user._id}`}>{profile?.user.username}</Link></h6>
-        <p>Logout</p>
+        <p style = {{cursor : "pointer"}} onClick = {() => dispatch(logout())}> Logout</p>
       </section>
       <section className="mt-4">
         <small className="text-muted mb-2">Suggestions for you</small>
