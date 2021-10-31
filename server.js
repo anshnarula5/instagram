@@ -4,11 +4,22 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 
-require("dotenv").config()
 
 const app = express();
 
-connectDB();
+const mongoose = require("mongoose");
+
+const db = async() => {
+    try {
+        await mongoose.connect("mongodb+srv://ansh:ansh123@cluster0.pl7m9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+        console.log("Mongoose running")
+    } catch (error) {
+        console.log(error)
+        process.exit(1)
+    }
+};
+
+db()
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: "30mb", extended: true }));
@@ -30,6 +41,6 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => console.log("Running on 5000"));
+app.listen(PORT, () => console.log(`Server running on ${PORT}`))
