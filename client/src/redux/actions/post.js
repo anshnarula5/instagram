@@ -3,7 +3,7 @@ import { COMMENT, CREATE_POST, DELETE_COMMENT, DELETE_POST, GET_POSTS, LIKE_COMM
 import { setAlert } from "./alerts";
 import {getProfile, getProfileById} from "./profile";
 
-const url = "http://localhost:5000/api/posts";
+const url = "https://instagram-a5.herokuapp.com/api/posts";
 
 export const getPosts = () => async (dispatch) => {
   try {

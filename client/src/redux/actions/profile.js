@@ -4,7 +4,7 @@ import {setAlert} from "./alerts"
 
 //Get my profile
 
-const url = "http://localhost:5000"
+const url = "https://instagram-a5.herokuapp.com"
 export const clearProfile = () => async (dispatch) => {
     try {
         dispatch({type : CLEAR_PROFILE})

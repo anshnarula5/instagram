@@ -5,7 +5,7 @@ import {REGISTER_SUCCESS, REGISTER_FAIL, LOGIN_SUCCESS, LOGIN_FAIL, USER_LOADED,
 import setAuthToken from "../../utils/setAuthToken"
 import {getProfile} from "./profile";
 
-const url = "http://localhost:5000"
+const url = "https://instagram-a5.herokuapp.com"
 
 //Load user
 
