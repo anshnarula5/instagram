@@ -1,8 +1,4 @@
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config()
-}
-
-const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/insta"
+const mongoose = require("mongoose");
 
 const express = require("express");
 const cors = require("cors");
@@ -10,23 +6,26 @@ const path = require("path");
 
 const app = express();
 
-const mongoose = require("mongoose");
+require("dotenv").config()
 
-const connectDB = async() => {
-    try {
-        await mongoose.connect(dbUrl)
-        console.log("Mongoose running")
-    } catch (error) {
-        console.log(error)
-        process.exit(1)
-    }
-};
-
-connectDB();
+const dbUrl = process.env.DB_URL
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: "30mb", extended: true }));
 app.use(cors());
+
+
+const connectDB = async() => {
+  try {
+      await mongoose.connect(dbUrl)
+      console.log("Mongoose running")
+  } catch (error) {
+      console.log(error)
+      process.exit(1)
+  }
+};
+
+connectDB();
 
 //routes
 
@@ -46,4 +45,4 @@ if (process.env.NODE_ENV === "production") {
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => console.log(`Running on ${PORT}`));
+app.listen(PORT, () => console.log("Running on 5000"));
