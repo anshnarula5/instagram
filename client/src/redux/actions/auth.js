@@ -7,6 +7,8 @@ import {getProfile} from "./profile";
 
 const url = "https://instagram-a5.herokuapp.com"
 
+//http://localhost:5000
+
 //Load user
 
 export const loadUser = () => async (dispatch) => {
