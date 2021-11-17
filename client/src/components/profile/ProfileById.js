@@ -11,6 +11,7 @@ const ProfileById = ({match}) => {
   useEffect(() => {
     dispatch(clearProfile())
     dispatch(getProfileById(match.params.id))
+    return () => dispatch(clearProfile())
   }, [dispatch, match.params.id])
   return (
     <>

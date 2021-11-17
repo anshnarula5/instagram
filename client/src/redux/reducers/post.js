@@ -13,7 +13,6 @@ const initialState = {
   post: null,
   posts: [],
   loading: true,
-
   error: {},
 };
 
